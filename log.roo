@@ -1,0 +1,11 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-05 12:38:32
+project --topLevelPackage com.nanhua.trading --projectName tradingcenter  --packaging POM
+module create --moduleName domain --topLevelPackage com.nanhua.trading.domain
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+module focus --moduleName ~
+module create --moduleName web --topLevelPackage com.nanhua.trading.web --packaging POM
+module create --moduleName ui --topLevelPackage com.nanhua.trading.web.ui
+web mvc setup
+module focus --moduleName ~
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-05 12:40:09
