@@ -55,18 +55,9 @@
 			});
 			*/
 			
-			var a  =dojo.byId("content");
-			a.innerHTML = "<iframe id='contentFrame' style='width:100%;height:100%;border:1px' border='1' src='http://www.goolge.com/'></iframe>";
-			//var s = "<iframe src='http://www.baidu.com/'></iframe>";
-			//contentArea.setContent(s);
-			/*
-			contentArea.destroyDescendants();
-			try{
-			contentArea.set("href", url);
-			}catch(e){
-				alert(e);
-			}
-			*/
+			//var a  =dojo.byId("content");
+			//a.innerHTML = '<iframe id='contentFrame' style='width:100%;height:100%;border:1px' border='1' src='http://www.163.com/'></iframe>';
+			contentArea.setContent('<iframe id='contentFrame' style='width:100%;height:100%;border:1px' border='1' src='http://www.163.com/'></iframe>');
 		}
 	}
 </script>
