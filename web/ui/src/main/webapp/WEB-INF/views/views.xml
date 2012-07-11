@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tiles-definitions PUBLIC
-	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
-	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
 	
-	<definition name="index" extends="main"></definition>	
-	<definition name="welcome" extends="default">
-    	<put-attribute name="body" value="/WEB-INF/views/welcome.jspx" />
+	<definition extends="main" name="index"/>	
+	<definition extends="default" name="welcome">
+    	<put-attribute name="body" value="/WEB-INF/views/welcome.jspx"/>
   	</definition>	
 	<!-- 
   <definition name="index" extends="default">
@@ -26,4 +23,7 @@
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx" />
   </definition>
 -->
+<definition extends="default" name="login">
+        <put-attribute name="body" value="/WEB-INF/views/login.jspx"/>
+    </definition>
 </tiles-definitions>

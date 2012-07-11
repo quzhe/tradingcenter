@@ -9,3 +9,8 @@ web mvc setup
 module focus --moduleName ~
 quit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-05 12:40:09
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-11 22:55:22
+module focus --moduleName web/ui
+security setup
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-11 23:30:58
