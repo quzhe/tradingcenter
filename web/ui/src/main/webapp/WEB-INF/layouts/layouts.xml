@@ -8,10 +8,12 @@
   	<put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
   	<put-attribute name="header" value="/WEB-INF/views/header.jspx" />
   		<!-- 
-		
-    	
-    	<put-attribute name="messages" value="/WEB-INF/views/messages.jspx" />
+		<put-attribute name="messages" value="/WEB-INF/views/messages.jspx" />
     	-->
+  </definition>
+  
+  <definition name="default" template="/WEB-INF/layouts/default.jspx">
+  	
   </definition>
   
   <!-- 

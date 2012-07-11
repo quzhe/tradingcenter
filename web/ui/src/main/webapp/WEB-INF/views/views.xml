@@ -6,7 +6,9 @@
 <tiles-definitions>
 	
 	<definition name="index" extends="main"></definition>	
-	
+	<definition name="welcome" extends="default">
+    	<put-attribute name="body" value="/WEB-INF/views/welcome.jspx" />
+  	</definition>	
 	<!-- 
   <definition name="index" extends="default">
     <put-attribute name="body" value="/WEB-INF/views/index.jspx" />
