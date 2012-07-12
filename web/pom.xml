@@ -20,6 +20,7 @@
     </properties>
     <modules>
         <module>ui</module>
+	<module>common</module>
     </modules>
     <dependencies>
         <dependency>
