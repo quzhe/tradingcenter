@@ -15,3 +15,6 @@ security setup
 quit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-11 23:30:58
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-12 17:48:48
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-13 22:47:00
+module focus --moduleName web/ui
+logging setup --level INFO

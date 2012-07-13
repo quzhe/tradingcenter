@@ -25,6 +25,11 @@
             <artifactId>domain</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.nanhua.trading</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!-- General dependencies for standard applications -->
         <dependency>
             <groupId>junit</groupId>

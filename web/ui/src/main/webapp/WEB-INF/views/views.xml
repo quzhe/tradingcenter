@@ -5,6 +5,10 @@
 	<definition extends="main" name="index"/>	
 	<definition extends="default" name="welcome">
     	<put-attribute name="body" value="/WEB-INF/views/welcome.jspx"/>
+  	</definition>
+  	
+  	<definition extends="default" name="devsuccess">
+    	<put-attribute name="body" value="/WEB-INF/views/devsuccess.jspx"/>
   	</definition>	
 	<!-- 
   <definition name="index" extends="default">
