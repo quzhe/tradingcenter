@@ -2,6 +2,7 @@ package com.nanhua.trading.web.dev;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ public class DevController extends CommonController{
 	private Logger logger=Logger.getLogger(this.getClass().getName());
 	
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value="initdata",method = RequestMethod.GET)
+	@RequestMapping(value="dev/initdata",method = RequestMethod.GET,produces=MediaType.TEXT_HTML_VALUE)
 	public String generateInitData(){
 		//ModelAndView mav = new ModelAndView("initdata");
 		generateAdmin();

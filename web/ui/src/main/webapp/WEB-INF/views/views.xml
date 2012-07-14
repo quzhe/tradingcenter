@@ -9,7 +9,8 @@
   	
   	<definition extends="default" name="devsuccess">
     	<put-attribute name="body" value="/WEB-INF/views/devsuccess.jspx"/>
-  	</definition>	
+  	</definition>
+  		
 	<!-- 
   <definition name="index" extends="default">
     <put-attribute name="body" value="/WEB-INF/views/index.jspx" />
