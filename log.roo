@@ -19,3 +19,28 @@ quit
 module focus --moduleName web/ui
 logging setup --level INFO
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-15 22:42:27
+module focus --moduleName domain
+entity jpa --class com.nanhua.trading.domain.datadict.DataDict --inheritanceType SINGLE_TABLE --testAutomatically
+field string --fieldName name --notNull --sizeMax 50
+entity jpa --class com.nanhua.trading.domain.datadict.NetworkType --extends com.nanhua.trading.domain.datadict.DataDict --testAutomatically
+entity jpa --class com.nanhua.trading.manager.market.domain.ServiceAddress  
+field string --fieldName address --notNull --sizeMax 200
+// [failed] field reference --fieldName networkType --type com.nanhua.trading.manager.market.domain.NetworkType --notNull --joinColumnName network_type_id --fetch EAGER
+// [failed] field reference --fieldName serviceSupplier --type com.nanhua.trading.manager.market.domain.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
+field string --fieldName description  --notNull --sizeMax 200
+entity jpa --class com.nanhua.trading.manager.market.domain.ServiceSupplier --testAutomatically
+field string --fieldName name --notNull --sizeMax 200
+field set --fieldName addresses --type com.nanhua.trading.manager.market.domain.ServiceAddress --class com.nanhua.trading.manager.market.domain.ServiceSupplier --mappedBy serviceSupplier --notNull true --nullRequired false --cardinality ONE_TO_MANY --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.servicesupplier.ServiceAddress  
+field string --fieldName address --notNull --sizeMax 200
+field reference --fieldName networkType --type com.nanhua.trading.domain.datadict.NetworkType --notNull --joinColumnName network_type_id --fetch EAGER
+// [failed] field reference --fieldName serviceSupplier --type com.nanhua.trading.servicesupplier.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
+field string --fieldName description  --notNull --sizeMax 200
+entity jpa --class com.nanhua.trading.domain.servicesupplier.ServiceSupplier --testAutomatically
+field string --fieldName name --notNull --sizeMax 200
+field set --fieldName addresses --type com.nanhua.trading.domain.servicesupplier.ServiceAddress --class com.nanhua.trading.domain.servicesupplier.ServiceSupplier --mappedBy serviceSupplier --notNull true --nullRequired false --cardinality ONE_TO_MANY --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.servicesupplier.ServiceAddress  
+field string --fieldName address --notNull --sizeMax 200
+field reference --fieldName networkType --type com.nanhua.trading.domain.datadict.NetworkType --notNull --joinColumnName network_type_id --fetch EAGER
+field reference --fieldName serviceSupplier --type com.nanhua.trading.domain.servicesupplier.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
+field string --fieldName description  --notNull --sizeMax 200

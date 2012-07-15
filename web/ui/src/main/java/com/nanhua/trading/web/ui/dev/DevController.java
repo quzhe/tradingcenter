@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.nanhua.trading.domain.account.Authority;
 import com.nanhua.trading.domain.account.User;
+import com.nanhua.trading.domain.datadict.NetworkType;
 import com.nanhua.trading.web.common.CommonController;
 
 //@RequestMapping("/dev")
@@ -39,5 +40,13 @@ public class DevController extends CommonController{
 		user.persist();
 		logger.info("init admin data");
 	}
-
+	
+	private void generateNetworkType(){
+		NetworkType nt = new NetworkType();
+		nt.setName("联通");
+		nt.persist();
+		
+		
+	}
+	
 }
