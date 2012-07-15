@@ -54,7 +54,7 @@ public class User implements UserDetails{
     @NotNull
     @Column(unique = true)
     @Size(max = 50)
-    @Pattern(regexp = "[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")
+    @Pattern(regexp = "^[\\w\\-]+(\\.[\\w\\-]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$")
 	private String email;
     
     

@@ -22,9 +22,10 @@ import com.nanhua.trading.web.errorhandler.SystemErrorMessage;
 
 @Aspect
 @Configurable
+//TODO move to audit project
 public class ControllerAspect {
 	private Logger logger=Logger.getLogger(this.getClass().getName());
-	@Autowired
+	//@Autowired
 	private RabbitTemplate amqpTemplate;
 	
 	@AfterReturning(value = "execution(* com.nanhua.trading.web.common.CommonController.handleUnexpectionException(..))&&"+"args(req,ex)")

@@ -18,3 +18,4 @@ quit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-13 22:47:00
 module focus --moduleName web/ui
 logging setup --level INFO
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-15 22:42:27
