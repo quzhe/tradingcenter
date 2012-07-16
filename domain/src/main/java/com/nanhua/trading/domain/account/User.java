@@ -143,6 +143,7 @@ public class User implements UserDetails{
     
 	}
 	public static void changePasswd(String oldpw,String newpw){
+		
 		UserDetails userdetail = (UserDetails)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		User u = User.findUserByUniqueIdentify(userdetail.getUsername());
 		if(u.getPassword().equals(oldpw)){

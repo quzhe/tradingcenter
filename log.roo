@@ -96,3 +96,11 @@ field reference --fieldName supplier --type com.nanhua.trading.domain.servicesup
 field string --fieldName serviceid --notNull
 field reference --fieldName correlator --type com.nanhua.trading.domain.correlator.Correlator --notNull --joinColumnName correlator_id --fetch EAGER
 field set --fieldName accounts --type com.nanhua.trading.domain.correlator.ServiceAccount --class com.nanhua.trading.domain.correlator.ServiceInstance --mappedBy serviceInstance   --cardinality ONE_TO_MANY --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.customer.Customer --testAutomatically
+field string --fieldName address --notNull
+field string --fieldName name --notNull
+field string --fieldName mobile --notNull
+field string --fieldName phone --notNull
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-16 17:33:52
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-16 20:46:19
