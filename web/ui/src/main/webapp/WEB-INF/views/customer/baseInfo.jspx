@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+
+	
+	<script type="text/javascript">
+		require([ "dijit/form/Form","dijit/form/ValidationTextBox", "dijit/form/Button" ]);
+	
+		dojo.addOnLoad(function(){
+			require(["dojo/ready", "dijit/form/Button", "dojo/dom"], function(ready, Button, dom){
+			    ready(function(){
+			        // Create a button programmatically:
+			        var myButton = new Button({
+			        	
+			            label: "<spring:message code="button_save" />",
+			            onClick: function(){
+			            	
+			            	var customerNode = customerTreeStore.get(<c:out value="${param.index}" />);
+							if (!dijit.byId("customerBaseInfoForm").validate())
+								return;
+							var customerBaseInfo = dojo.formToObject("customerBaseInfoForm");
+							dojo.mixin(customerNode, customerBaseInfo);
+							customerTreeStore.put(customerNode);
+							dojo.byId("customerMessages").innerHTML="基本信息存储成功";
+						}
+			        }, "saveBaseInfoNode");
+			    });
+			    
+			});
+		});
+	</script>
+	<div id="baseinfoMessage"><!--  --></div>
+	<div data-dojo-type="dijit/form/Form" id="customerBaseInfoForm"
+				data-dojo-id="customerBaseInfoForm" action="" method="">
+	<br></br>			
+	<script type="dojo/method">
+			dojo.addOnLoad(function(){
+				var customerBaseInfoForm = dijit.byId("customerBaseInfoForm");
+				var customerNode = customerTreeStore.get(<c:out value="${param.index}" />);
+				customerBaseInfoForm.attr('value', customerNode);
+
+			});
+	</script>
+	<label for="username">username:</label> 
+	<input type="text" id="customerBaseInfoUsername"
+					name="username" required="true"
+					data-dojo-type="dijit/form/ValidationTextBox" /> <br /> <br />
+	
+	<label for="email">email:</label> 
+	<input type="text" id="customerBaseInfoEmail"
+					name="email" required="true"
+					data-dojo-type="dijit/form/ValidationTextBox"/> <br /> <br />						
+	
+	<label>name:</label> 
+	<input type="text" id="customerBaseInfoName"
+					name="name" required="true"
+					data-dojo-type="dijit/form/ValidationTextBox" ><!-- sdf --></input> <br /> <br />
+	
+	<label>mobile:</label> 
+	<input type="text" id="customerBaseInfoMobile"
+					name="mobile" required="true"
+					data-dojo-type="dijit/form/ValidationTextBox" /> <br /> <br />		
+	<label>phone:</label> 
+	<input type="text" id="customerBaseInfoPhone"
+					name="phone" required="true"
+					data-dojo-type="dijit/form/ValidationTextBox" /> <br /> <br />		
+	<label>address:</label> 
+	<input type="text" id="customerBaseInfoAddress"
+					name="address" required="true"
+					data-dojo-type="dijit/form/ValidationTextBox" >
+	<!-- s -->		
+	</input>				
+	<br /> <br />		
+	
+	
+	
+	</div>
+	
+	
+	
+	<button id="saveBaseInfoNode" type="button"><!-- ff --></button>
+	
+</div>

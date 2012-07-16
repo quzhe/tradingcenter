@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	
+	<spring:url value="/serviceaddress" var="serviceaddress_url"/>
+	
+	<script type="text/javascript">
+		require([ "dijit/form/Form","dijit/form/ValidationTextBox","dijit/layout/ContentPane"]);
+		
+		
+		dojo.addOnLoad(function(){
+			require(["dojo/ready", "dijit/form/Button", "dojo/dom"], function(ready, Button, dom){
+			    ready(function(){
+			        // Create a button programmatically:
+			        var myButton = new Button({
+			            label: "<spring:message code="button_save" />",
+			            onClick: function(){
+			            	var serviceNode = customerTreeStore.get(<c:out value="${param.index}" />);
+							if (!dijit.byId("serviceInfoForm").validate())
+								return;
+							var serviceInfo = dojo.formToObject("serviceInfoForm");
+							dojo.mixin(serviceNode, serviceInfo);
+							customerTreeStore.put(serviceNode);
+							dojo.byId("customerMessages").innerHTML="服务信息存储成功";
+						}
+			        }, "saveServiceInfoNode");
+			    });
+			});
+			
+				
+			
+		});
+	</script>
+	<div id="serviceInstanceInfoPane" style="width: 100%; height:20%" data-dojo-type="dijit.layout.ContentPane"> 
+		<div data-dojo-type="dijit/form/Form" id="serviceInfoForm"
+					data-dojo-id="serviceInfoForm" action="" method="">
+		<script type="dojo/method">
+			dojo.addOnLoad(function(){
+				var serviceInfoForm = dijit.byId("serviceInfoForm");
+				var serviceNode = customerTreeStore.get(<c:out value="${param.index}" />);
+				serviceInfoForm.attr('value', serviceNode);
+			});
+		</script>
+		
+		
+		<label>serviceid:</label> 
+		<input type="text" id="customerServiceid"
+						name="serviceid" required="true"
+						data-dojo-type="dijit/form/ValidationTextBox" /> <br /> <br />
+		<label>description:</label> 
+		<input type="text" id="customerServiceDesc"
+						name="description"
+						data-dojo-type="dijit/form/ValidationTextBox" /> <br /> <br />
+		<button id="saveServiceInfoNode" type="button"><!-- ff --></button>
+		</div>
+	</div>
+	<div id="serviceInstanceAddressesPane" style="width: 100%; height:200px" data-dojo-type="dijit.layout.ContentPane">
+		<script type="dojo/method">
+			dojo.addOnLoad(function(){
+				var layout = [[
+				 		      {'name': 'address', 'field': 'address', 'width': '50%'},
+				 		      {'name': 'description', 'field': 'description', 'width': '50%'}
+				 		      
+				]];
+				require([ 'dojo/store/Memory','dojo/data/ObjectStore','dojox/grid/DataGrid','dojo/_base/array'], function() {
+					var serviceNode = customerTreeStore.get(<c:out value="${param.index}" />);
+					var supplierNode = customerTreeStore.get(<c:out value="${param.supplierid}" />);
+					//alert(dojo.toJson(supplierNode.addresses));
+					//alert(<c:out value="${param.networkid}" />);
+					serviceNode.addresses = dojo.filter(supplierNode.addresses, function(address){
+							return address.networkType.id == <c:out value="${param.networkid}" />;
+					});
+					var addressMemory = new Memory({
+								data : serviceNode.addresses,
+								idProperty : "id"
+					});
+					var addressStore = new ObjectStore({
+								objectStore : addressMemory
+								
+					});
+							
+					var serviceAddressGrid = new DataGrid({
+						        store: addressStore,
+						        structure: layout,
+								style:"height:100%"},
+						        document.createElement('div'));
+							
+					dojo.byId("serviceInstanceAddressesPane").appendChild(serviceAddressGrid.domNode);
+					serviceAddressGrid.startup();	
+					
+					
+				});
+
+			});	
+		</script>	
+	
+	</div>
+	
+	
+</div>

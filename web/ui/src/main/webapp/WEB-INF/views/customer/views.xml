@@ -9,6 +9,14 @@
     	<put-attribute name="form" value="/WEB-INF/views/customer/form.jspx" />
     	<put-attribute name="searchResult" value="/WEB-INF/views/customer/searchResult.jspx" />
   	</definition>
-
+	<definition name="customer/baseinfo" extends="content">
+        <put-attribute name="content" value="/WEB-INF/views/customer/baseinfo.jspx"/>
+    </definition>
+	<definition name="customer/correlatorinfo" extends="content">
+        <put-attribute name="content" value="/WEB-INF/views/customer/correlatorinfo.jspx"/>
+    </definition>
+    <definition name="customer/serviceinfo" extends="content">
+        <put-attribute name="content" value="/WEB-INF/views/customer/serviceinfo.jspx"/>
+    </definition>
     
 </tiles-definitions>

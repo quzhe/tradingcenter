@@ -3,7 +3,490 @@
 	
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
+	<spring:url value="/servicesupplier" var="supplier_url" />	
+	<spring:url value="/admin/customer?baseinfo" var="customerbaseinfo_url" />
+	<spring:url value="/admin/customer?correlatorinfo" var="customercorrelatorinfo_url" />
+	<spring:url value="/admin/customer?serviceinfo" var="customerserviceinfo_url" />
+	<spring:url value="/admin/customer" var="savecustomer_url" />
+	<spring:url value="/admin/customer" var="getcustomer_url" />
 	
-	form
+	<script type="text/javascript">
+	var isCreateForm = true;
+	var servicesuppliers = new Array();
+	dojo.addOnLoad(function(){
+		var correlatorindex=100;
+		var index= 100;
+		
+		initCustomerTree();
+		
+		
+		//init supplier
+		require([ 'dojo/_base/xhr','dojo/_base/json','dojo/_base/array'], function(xhr) {
+			xhr.get({
+				url : "${supplier_url}",
+				headers: {
+				    'accept': 'application/json'
+				},
+				sync:true,
+				handleAs : "json",
+				load : function(suppliers) {
+					servicesuppliers = suppliers;
+				},
+				error: function(error,ioArgs){
+			    	 require(["dojo/_base/connect"], function(connect){
+						  connect.publish("resterror", [{
+						    status:ioArgs.xhr.status,
+						    message:dojo.toJson(error)
+						  }]);
+					});  
+			    }
+			});
+		});
+		
+		//init button
+		require(["dojo/ready", "dijit/form/Button", "dojo/dom"], function(ready, Button, dom){
+		    ready(function(){
+		        // Create a button programmatically:
+		        var myButton = new Button({
+		        	
+		            label: "<spring:message code="button_save" />",
+		            onClick: function(){
+		            	var customer = new Object();
+		            	var customerNode = customerTreeStore.query({root:true})[0];
+		            	
+		            	dojo.mixin(customer, customerNode);
+		            	var message = validateCustomer(customer);
+			            if(message.length==0){
+			            		if(isCreateForm)
+					            	require([ 'dojo/_base/xhr' ], function(xhr) {
+										xhr.post({
+											url : "${savecustomer_url}",
+											headers: {
+											    'accept': 'application/json'
+											},
+											handleAs : "json",
+											postData: dojo.toJson(customer),
+											headers: { "Content-Type": "application/json","Accept": "application/json"},
+											error: function(error,ioArgs){
+										    	 require(["dojo/_base/connect"], function(connect){
+													  connect.publish("resterror", [{
+													    status:ioArgs.xhr.status,
+													    message:dojo.toJson(error)
+													  }]);
+												});  
+										    }
+										});
+									});
+			            		else
+			            			require([ 'dojo/_base/xhr' ], function(xhr) {
+										xhr.put({
+											url : "${savecustomer_url}",
+											headers: {
+											    'accept': 'application/json'
+											},
+											handleAs : "json",
+											postData: dojo.toJson(customer),
+											headers: { "Content-Type": "application/json","Accept": "application/json"},
+											error: function(error,ioArgs){
+										    	 require(["dojo/_base/connect"], function(connect){
+													  connect.publish("resterror", [{
+													    status:ioArgs.xhr.status,
+													    message:dojo.toJson(error)
+													  }]);
+												});  
+										    }
+										});
+									});
+				            	initCustomerTree();
+				            	var dialog = dijit.byId("formDialog");
+				    			dialog.hide();	
+				    			
+				        }else{
+			            		require(["dojo/_base/connect"], function(connect){
+									  connect.publish("resterror", [{
+									    message:dojo.toJson(message)
+									  }]);
+								});
+				        }			          
+		            	
+					}}, "saveCustomer");
+		    });
+		    
+		});
+	});
+	
+	function setMenus(){
+		require([ 'dijit/Menu','dijit/MenuItem','dojo/query!css2'], function(Menu,MenuItem) {
+			if(typeof dijit.byId("customer_tree_menu")!='undefined')
+				dijit.byId("customer_tree_menu").destroy();
+			
+			var menu = new Menu({
+				id:'customer_tree_menu',
+		    	targetNodeIds:["customerTree"],
+				selector: ".dijitTreeNode"
+		    });
+			if(typeof dijit.byId("customer_new_correlator_menu_item")!='undefined')
+				dijit.byId("customer_new_correlator_menu_item").destroy();
+			menu.addChild(new MenuItem({
+				
+				id:'customer_new_correlator_menu_item',
+		        label:"新增Correlator",
+				onClick: function(evt) {
+					var tn = dijit.byNode(this.getParent().currentTarget);
+					setCorrelatorNodes(tn.item,true);
+				}
+		    }));
+			
+			if(typeof dijit.byId("correlator_delete_correlator_menu_item")!='undefined')
+				dijit.byId("correlator_delete_correlator_menu_item").destroy();
+			menu.addChild(new MenuItem({
+				id:'correlator_delete_correlator_menu_item',
+		        label:"删除Correlator"
+
+		    }));
+			if(typeof dijit.byId("supplier_new_service_menu_item")!='undefined')
+				dijit.byId("supplier_new_service_menu_item").destroy();
+			
+			menu.addChild(new MenuItem({
+				id:'supplier_new_service_menu_item',
+		        label:"新增Service",
+				onClick: function(evt) {
+					var tn = dijit.byNode(this.getParent().currentTarget);
+					addServiceNode(tn.item,true);
+				}
+		    }));
+			if(typeof dijit.byId("service_delete_service_menu_item")!='undefined')
+				dijit.byId("service_delete_service_menu_item").destroy();
+			menu.addChild(new MenuItem({
+				id:'service_delete_service_menu_item',
+		        label:"删除Service"
+		    }));
+
+			//<![CDATA[
+			dojo.connect(menu, "_openMyself", this, function(e){
+				var tn = dijit.getEnclosingWidget(e.target);
+				menu.getChildren().forEach(function(i){
+					i.set('disabled', true);
+					if(dojo.string.beginsWith('customer',i.id) && tn.item.type=='customer')
+						i.set('disabled', false);
+					if(dojo.string.beginsWith('supplier',i.id) && tn.item.type=='supplier')
+						i.set('disabled', false);
+					if(dojo.string.beginsWith('correlator',i.id) && tn.item.type=='correlator')
+						i.set('disabled', false);
+					if(dojo.string.beginsWith('service',i.id) && tn.item.type=='service')
+						i.set('disabled', false);
+					
+				});
+			});
+
+			//]]>
+		
+		});
+		
+		
+	}
+	
+	
+	function initCustomerTree(){
+		require([ 'dojo/store/Memory','dojo/store/Observable','dijit/tree/ObjectStoreModel','dijit/Tree'], function(Memory,Observable,ObjectStoreModel,Tree) {
+			customerTreeStore = new Memory({
+					data:[{index:-1,root:true,type:'customer'}],
+					idProperty: 'index',
+					getChildren: function(object){
+						var dd = this.query({parent: object.index});
+						return dd;
+					}
+			});
+			customerTreeStore = new Observable(customerTreeStore);		
+			treeModel = new ObjectStoreModel({
+					store: customerTreeStore,
+					query: { root: true }
+			});
+			rebuildCustomerTree();
+			
+		});
+	}
+	
+	function rebuildCustomerTree(){
+		require(['dijit/Tree'], function(Tree) {
+		if(typeof dijit.byId("customerTree")!='undefined')
+			customerTree.destroy();
+		
+		customerTree =new Tree({
+			id:'customerTree',
+			model: treeModel,
+			autoExpand:true
+		});
+		dojo.byId("createCustomerTreePane").appendChild(customerTree.domNode);
+		dojo.connect(customerTree, "onClick", function(item,node) {
+			
+			//<![CDATA[
+			if(item.type=="customer"){
+				var createCustomerContentPane = dijit.byId("createCustomerContentPane");
+				createCustomerContentPane.destroyDescendants();
+				
+				createCustomerContentPane.set("href", "${customerbaseinfo_url}&index="+item.index);
+			}
+			if(item.type=="correlator"){
+				var createCustomerContentPane = dijit.byId("createCustomerContentPane");
+				createCustomerContentPane.set("href", "${customercorrelatorinfo_url}&index="+item.index);
+			}
+			if(item.type=="service"){
+				
+				var createCustomerContentPane = dijit.byId("createCustomerContentPane");
+				//需要给correlator加上network属性
+				var supplier = customerTreeStore.get(item.parent);
+				var correlator = customerTreeStore.get(supplier.parent);
+				if(typeof correlator.networkType == 'undefined'){
+					alert("Correlator 未设置网络类型");
+					return;
+					
+				}else{
+					createCustomerContentPane.set("href", "${customerserviceinfo_url}&index="+item.index+"&supplierid="+supplier.index+"&networkid="+correlator.networkType.id);
+				}
+			}
+			//]]>
+		}); 
+		setMenus();
+		});
+	}
+	
+	
+	function validate(obj,str,errorMessages){
+		if (obj==null || typeof obj=='undefined'|| obj=='')
+			errorMessages.push(str+" 输入不合法！");
+		
+	}
+	function validateCustomer(customer){
+		var errorMessages = new Array();	    
+		validate(customer.username,"username",errorMessages);
+		validate(customer.email,"email",errorMessages);
+		validate(customer.name,"name",errorMessages);
+		validate(customer.mobile,"mobile",errorMessages);
+		validate(customer.phone,"phone",errorMessages);
+		customer.password="empty";
+			
+			customer.correlators = new Array();
+			
+			require(["dojo/_base/array"], function(array){
+				var correlatorNodes = customerTreeStore.query({parent:customer.index});
+				
+				array.forEach(correlatorNodes,
+				    function(correlatorNode){
+						var correlator = new Object();
+						dojo.mixin(correlator, correlatorNode);
+						validate(correlator.name,"correlator.name",errorMessages);
+						validate(correlator.hostname,"correlator.hostname",errorMessages);
+						validate(correlator.port,"correlator.port",errorMessages);
+						correlator.serviceInstances = new Array();
+				    	
+						var supplierNodes = customerTreeStore.query({parent:correlator.index});
+						array.forEach(supplierNodes,
+							function(supplierNode){
+								var instanceNodes = customerTreeStore.query({parent:supplierNode.index});
+								array.forEach(instanceNodes,
+									function(instanceNode){
+										var instance = new Object();
+										dojo.mixin(instance, instanceNode);
+										instance.supplier=supplierNode;
+										correlator.serviceInstances.push(instance);
+								});
+								
+						});
+						
+				    	customer.correlators.push(correlator);
+				    }
+				);
+			});
+			return errorMessages;
+	}
+	
+	
+	function setCustomerTreeNodes(isCreate){
+		
+		index=100;
+		customerTree.model.getRoot(function onItem(rootNode){
+			rootNode.index=index;
+			index++;
+		
+			if(isCreate){
+				rootNode.name="基本信息";
+			}else{
+				var customerGrid = dijit.byId("customerGrid");
+				var selected = customerGrid.selection.getSelected()[0];
+				require([ 'dojo/_base/xhr'], function(xhr) {
+					xhr.get({
+						//<![CDATA[
+						url : "${getcustomer_url}/"+selected.id,
+						//]]>
+						headers: {
+						    'accept': 'application/json'
+						},
+						sync:true,
+						handleAs : "json",
+						load : function(customer) {
+							dojo.mixin(rootNode, customer);
+						},
+						error: function(error,ioArgs){
+					    	 require(["dojo/_base/connect"], function(connect){
+								  connect.publish("resterror", [{
+								    status:ioArgs.xhr.status,
+								    message:dojo.toJson(error)
+								  }]);
+							});  
+					    }
+					});
+				});
+			}
+			customerTreeStore.put(rootNode,{overwrite:true});
+			setCorrelatorNodes(rootNode,isCreate);
+			//rootNode.correlators=undefined;
+		});
+	}
+	
+	function setCorrelatorNodes(customerNode,isCreate){
+		//TODO refactor
+		if(typeof customerNode.username!='undefined'){
+			if(isCreate){
+				var node = new Object();
+				node.type='correlator';
+				node.parent=customerNode.index;
+				node.index=index;
+				index++;
+				node.name="correlator_"+customerNode.username+"_"+node.index;
+				//node.name="correlator"+node.index;
+				addSupplierNodes(node,isCreate);
+				customerTreeStore.put(node,{overwrite:true});
+			}else{
+				customerNode.correlators.forEach(function(correlator){
+					
+					var node = new Object();
+					node.type='correlator';
+					node.parent=customerNode.index;
+					node.index=index;
+					index++;
+					dojo.mixin(node, correlator);
+					customerTreeStore.put(node,{overwrite:true});
+					addSupplierNodes(node,isCreate);
+				});
+			}
+		}
+		
+	}
+	
+	function addSupplierNodes(correlator,isCreate){
+		
+		dojo.forEach(servicesuppliers,function(supplier){
+			supplier.type='supplier';
+			supplier.parent=correlator.index;
+			//supplier.addresses=undefined;
+			customerTreeStore.put(supplier);
+			if(isCreate){
+				//alert(dojo.toJson(supplier.addresses));
+				//do nothing
+			}else{
+				dojo.forEach(correlator.serviceInstances,function(instance){
+					
+					if(instance.supplier.id==supplier.id){
+						var instanceNode = new Object();
+						instanceNode.index = index;
+						index++;
+						instanceNode.type='service';
+						instanceNode.parent=supplier.index;
+						instanceNode.name=instance.serviceid;
+						dojo.mixin(instanceNode, instance);
+						
+						customerTreeStore.put(instanceNode);
+					}
+				});
+			}
+			
+		});
+		
+	}
+	
+	
+	function addServiceNode(supplier,isCreate){
+		
+		var node = new Object();
+		node.index=index;
+		index++;
+		node.name=supplier.serviceIdPrefix+node.index;
+		node.serviceid=node.name;
+		node.type='service';
+		node.parent=supplier.index;
+		
+		var correlator = customerTreeStore.query({index:supplier.parent})[0];
+		if(typeof correlator.networkType == 'undefined'){
+			alert("Correlator 未设置网络类型");
+			return;
+		}
+		
+		customerTreeStore.put(node);
+	}
+
+	
+	</script>
+	
+	
+	
+	
+	<div dojoType="dijit/layout/BorderContainer" id="createCustomerBorderContainer" style="width: 780px; height: 550px;">
+		
+		<div dojoType="dojox/layout/ContentPane" id="createCustomerTreePane" region="leading" style="width: 30%;height: 95%;">
+			
+		<script type="dojo/method">
+		dojo.addOnLoad(function(){
+			var dialog = dijit.byId("formDialog");
+
+			
+			dialog.onCancel=function(evt){
+				initCustomerTree();
+				dialog.hide();	
+			}
+
+			
+			var create = dijit.byId("create");
+			dojo.connect(create, "onClick",this,  function(){
+				isCreateForm = true;
+				setCustomerTreeNodes(true);
+				rebuildCustomerTree();
+				
+				dialog.show();
+			});
+			
+			var edit = dijit.byId("edit");
+			dojo.connect(edit, "onClick",this,  function(){
+				isCreateForm = false;
+				var customerGrid = dijit.byId("customerGrid");
+				var item = customerGrid.selection.getSelected()[0];
+				if(typeof item=='undefined')
+					return;
+				setCustomerTreeNodes(false);
+				rebuildCustomerTree();
+				dialog.show();
+			});
+			
+
+		});
+		
+		
+		</script>
+		
+		
+		
+		
+		</div>
+		<div dojoType="dojox/layout/ContentPane" id="createCustomerContentPane" region="trailing" style="width: 70%; height: 95%;">
+			<!-- ff -->
+		</div>
+		
+		<div dojoType="dojox/layout/ContentPane" id="createCustomerButtonPane" style="width: 100%; height: 5%;" region="bottom">
+			<button id="saveCustomer" type="button"><!-- ff --></button>
+		</div>
+		
+		
+	</div>
+	<span id="customer_tree_menu"><!-- ff --></span>
 	
 </div>

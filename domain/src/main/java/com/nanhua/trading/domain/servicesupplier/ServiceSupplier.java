@@ -32,7 +32,8 @@ public class ServiceSupplier {
    
     @Size(max = 200)
     private String brokerid;
-
+    
+    //TODO set to lazy after upgrate to spring3.2
     @NotNull
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "serviceSupplier",orphanRemoval=true)
     @JsonManagedReference

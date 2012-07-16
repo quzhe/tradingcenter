@@ -49,6 +49,7 @@
 	</div>
 	
 	<div id="formDialog" data-dojo-type="dijit/Dialog" title="" style="width: 800px; height: 600px;">
+		<div id="messages"></div>
 		<tiles:insertAttribute name="form"/>
 	</div>
 </body>
