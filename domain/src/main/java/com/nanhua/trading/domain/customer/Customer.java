@@ -68,6 +68,8 @@ public class Customer extends User{
         }
     }
     
+    
+    
     public static Customer findCustomerByUniqueIdentify(String identify){
     	
 		Query q = entityManager().createQuery("SELECT  s FROM Customer AS s WHERE s.username= :identify or s.email=:identify");

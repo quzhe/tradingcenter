@@ -25,7 +25,7 @@
 							var customerBaseInfo = dojo.formToObject("customerBaseInfoForm");
 							dojo.mixin(customerNode, customerBaseInfo);
 							customerTreeStore.put(customerNode);
-							dojo.byId("customerMessages").innerHTML="基本信息存储成功";
+							dojo.byId("messages").innerHTML="<p>基本信息存储成功</p>";
 						}
 			        }, "saveBaseInfoNode");
 			    });

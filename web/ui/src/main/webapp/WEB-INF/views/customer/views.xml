@@ -10,13 +10,13 @@
     	<put-attribute name="searchResult" value="/WEB-INF/views/customer/searchResult.jspx" />
   	</definition>
 	<definition name="customer/baseinfo" extends="content">
-        <put-attribute name="content" value="/WEB-INF/views/customer/baseinfo.jspx"/>
+        <put-attribute name="content" value="/WEB-INF/views/customer/baseInfo.jspx"/>
     </definition>
 	<definition name="customer/correlatorinfo" extends="content">
-        <put-attribute name="content" value="/WEB-INF/views/customer/correlatorinfo.jspx"/>
+        <put-attribute name="content" value="/WEB-INF/views/customer/correlatorInfo.jspx"/>
     </definition>
     <definition name="customer/serviceinfo" extends="content">
-        <put-attribute name="content" value="/WEB-INF/views/customer/serviceinfo.jspx"/>
+        <put-attribute name="content" value="/WEB-INF/views/customer/serviceInfo.jspx"/>
     </definition>
     
 </tiles-definitions>

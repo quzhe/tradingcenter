@@ -10,6 +10,8 @@
 	<spring:url value="/admin/customer" var="savecustomer_url" />
 	<spring:url value="/admin/customer" var="getcustomer_url" />
 	
+	
+	
 	<script type="text/javascript">
 	var isCreateForm = true;
 	var servicesuppliers = new Array();
@@ -370,6 +372,9 @@
 					addSupplierNodes(node,isCreate);
 				});
 			}
+		}else{
+			alert("f");
+			//dojo.byId("messages").innerHTML="基本信息就不完整";
 		}
 		
 	}
