@@ -1,0 +1,28 @@
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:sec="http://www.springframework.org/security/tags" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+	<spring:url value="/resources/styles/nanhua.css" var="nanhua_css_url" />
+	<link href="${nanhua_css_url}" rel="stylesheet" type="text/css" />
+	
+	 
+	<link href="http://livedocs.dojotoolkit.org/_static/dijit/themes/soria/soria.css" rel="stylesheet" type="text/css"/>
+	<link href="http://livedocs.dojotoolkit.org/_static/dojox/grid/resources/Grid.css" rel="stylesheet" type="text/css" />
+	<link href="http://livedocs.dojotoolkit.org/_static/dojox/grid/resources/soriaGrid.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://livedocs.dojotoolkit.org/_static/dojo/dojo.js" data-dojo-config='parseOnLoad: true'><!-- ff --></script>
+	
+	
+	
+	<!--  
+	<link href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dijit/themes/soria/soria.css" rel="stylesheet" type="text/css"/>
+	<link href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojox/grid/resources/Grid.css" rel="stylesheet" type="text/css" />
+	<link href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojox/grid/resources/soriaGrid.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config='parseOnLoad: true'></script>
+	-->
+	
+	<spring:url value="/resources/scripts/dojo.string.addon.js" var="dojo_string_addon_url" />
+	<script type="text/javascript" src="${dojo_string_addon_url}">
+	<!-- empty -->	
+	</script>
+ 	
+</div> 

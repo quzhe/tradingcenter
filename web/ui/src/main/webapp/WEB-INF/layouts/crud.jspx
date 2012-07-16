@@ -1,0 +1,55 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">
+
+<jsp:output omit-xml-declaration="yes" />
+
+<jsp:output doctype-root-element="html"
+	doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+	doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" />
+
+
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+<jsp:directive.page pageEncoding="UTF-8" />
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<tiles:insertAttribute name="resources" />
+<script type="text/javascript">
+	require([ "dojo/parser", "dijit/layout/BorderContainer",
+			"dojox/layout/ContentPane", "dijit/Dialog", "dijit/form/Form",
+			"dijit/form/ValidationTextBox", "dijit/form/Button" ]);
+</script>
+
+</head>
+
+<body class="soria" style="height: 100%">
+	<div dojoType="dojox/layout/ContentPane"  id="searchPane" style="width: 100%; height: 15%;">
+		<tiles:insertAttribute name="searchCondition"/>
+	</div>
+	<div dojoType="dojox/layout/ContentPane"  id="buttonPane" style="width: 100%; height: 10%;">
+		<button id="create" data-dojo-type="dijit/form/Button" type="button">
+			<spring:message code="button_create" />
+		</button>
+		<button id="edit" data-dojo-type="dijit/form/Button" type="button">
+			<spring:message code="button_edit" />
+		</button>
+		<button id="delete" data-dojo-type="dijit/form/Button" type="button">
+			<spring:message code="button_delete" />
+		</button>
+	</div>
+	<div dojoType="dojox/layout/ContentPane"  id="searchResultPane" style="width: 100%; height: 75%;">
+		 
+		<tiles:insertAttribute name="searchResult"/>
+		
+	</div>
+	
+	<div id="formDialog" data-dojo-type="dijit/Dialog" title="" style="width: 800px; height: 600px;">
+		<tiles:insertAttribute name="form"/>
+	</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<script type="text/javascript">
+	require([ "dijit/form/Form","dijit/form/TextBox"]);
+	</script>
+	
+	
+	 
+	<spring:url value="/admin/customer?findByName" var="customersearch_url"/>
+	<script type="text/javascript">
+		
+		dojo.addOnLoad(function(){
+			require(["dojo/ready", "dijit/form/Button", "dojo/dom"], function(ready, Button, dom){
+				ready(function(){
+					 // Create a button programmatically:
+			        var myButton = new Button({
+			            label: "<spring:message code="button_find" />",
+			            onClick: function(){
+			            	require(['dojo/_base/xhr','dojo/store/Memory','dojo/data/ObjectStore','dojox/grid/DataGrid'], function(xhr){
+			            		xhr.get({
+			    					url : "${customersearch_url}",
+			    					headers: {
+			    					   	'accept': 'application/json'
+			    					},
+			    					sync:true,
+			    					handleAs : "json",
+			    					load : function(customers) {
+			    						var custMemory = new dojo.store.Memory({
+			    							data : customers
+			    						});
+			    						var custStore = new dojo.data.ObjectStore({
+			    							objectStore : custMemory
+			    						});
+			    						var resultgrid = dijit.byId("customerGrid");
+					            		resultgrid.setStore(custStore);
+			    					},
+			    					error: function(error,ioArgs){
+			    				    	 require(["dojo/_base/connect"], function(connect){
+			    							  connect.publish("resterror", [{
+			    							    status:ioArgs.xhr.status,
+			    							    message:dojo.toJson(error)
+			    							  }]);
+			    						});  
+			    				    }
+			            		});
+			    				
+			            		//customerQueryStore
+			            		//resultgrid.startup();  
+							});	
+						}
+			        }, "search");
+				});	
+			});
+			
+			
+
+			
+		});
+	</script>
+	
+	
+	<div data-dojo-type="dijit/form/Form" id="searchForm"
+		data-dojo-id="searchForm" action="" method="">
+
+		<table>
+			<tr>
+				<td><label for="name">Name:</label></td>
+				<td><input type="text" name="name"
+					data-dojo-type="dijit/form/TextBox" data-dojo-props="trim:true"
+					id="name" /></td>
+				<td>
+					<button id="search" type="button">
+						<spring:message code="button_find" />
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+</div>

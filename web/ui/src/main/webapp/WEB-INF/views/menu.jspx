@@ -2,8 +2,9 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes"/>
 	
-	<spring:url value="/resources/images/usermanager.jpg" var="usermanager_url" />
-	<li><img alt="" src="${usermanager_url}"><!--  --></img><a href="javascript:menuClick('test');">用户管理</a></li>
+	<spring:url value="/resources/images/usermanager.jpg" var="img_usermanager_url" />
+	<spring:url value="/admin/customer/main" var="customermanager_url" />
+	<li><img alt="" src="${img_usermanager_url}"><!--  --></img><a href="javascript:menuClick('${customermanager_url}');">用户管理</a></li>
   	
   	<spring:url value="/resources/images/usermanager.jpg" var="usermanager_url" />
 	<li><img alt="" src="${usermanager_url}"><!--  --></img><a href="#">用户管理</a></li>

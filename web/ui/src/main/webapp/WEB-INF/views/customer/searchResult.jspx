@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	
+	
+	
+	
+	<spring:url value="/admin/customer" var="customerquery_url"/>
+	<div id="customerSearchResultPane"></div>
+	
+		<script type="text/javascript">
+			dojo.addOnLoad(function(){
+				var layout = [[
+					 		      {'name': 'username', 'field': 'username', 'width': '20%'},
+					 		      {'name': 'name', 'field': 'name', 'width': '20%'},
+								  {'name': 'email', 'field': 'email', 'width': '20%'},
+	                              {'name': 'mobile', 'field': 'mobile', 'width': '20%'},
+								  {'name': 'phone', 'field': 'phone', 'width': '20%'}
+					 		      
+				]];
+				
+				require([ 'dojo/store/Observable','dojo/store/Memory','dojo/data/ObjectStore','dojox/grid/DataGrid'], function(Observable,Memory,ObjectStore,DataGrid) {
+				var custMemory = new Memory({
+					data : [],
+					idProperty : "id"
+				});
+				custMemory = new Observable(custMemory);
+				var custStore = new ObjectStore({
+					objectStore : custMemory
+				});
+				var customerGrid = new DataGrid({
+			        id: 'customerGrid',
+			        store: custStore,
+			        structure: layout,
+			        selectionMode:'single',
+					style:"height:100px"},
+					dojo.byId("customerSearchResultPane"));
+				customerGrid.startup();	
+				});
+				
+			    
+				
+			});	
+			
+		</script>	
+	
+	
+</div>

@@ -7,15 +7,18 @@
   <definition name="main" template="/WEB-INF/layouts/main.jspx">
   	<put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
   	<put-attribute name="header" value="/WEB-INF/views/header.jspx" />
+  	<put-attribute name="resources" value="/WEB-INF/views/resources.jspx" />
   		<!-- 
 		<put-attribute name="messages" value="/WEB-INF/views/messages.jspx" />
     	-->
   </definition>
   
   <definition name="default" template="/WEB-INF/layouts/default.jspx">
-  	
+  	<put-attribute name="resources" value="/WEB-INF/views/resources.jspx" />
   </definition>
-  
+  <definition name="crud" template="/WEB-INF/layouts/crud.jspx">
+  	<put-attribute name="resources" value="/WEB-INF/views/resources.jspx" />
+  </definition>
   <!-- 
   <definition name="default" template="/WEB-INF/layouts/default.jspx">
     <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
