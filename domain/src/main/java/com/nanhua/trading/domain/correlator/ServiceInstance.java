@@ -38,7 +38,9 @@ public class ServiceInstance {
     @JoinColumn(name = "correlator_id")
     @JsonBackReference
     private Correlator correlator;
-
+    
+    private Integer accountLimit;
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "serviceInstance",orphanRemoval=true)
     @JsonManagedReference
     private Set<ServiceAccount> accounts = new HashSet<ServiceAccount>();

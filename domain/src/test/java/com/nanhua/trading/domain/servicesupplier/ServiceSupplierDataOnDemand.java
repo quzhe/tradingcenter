@@ -14,7 +14,7 @@ public class ServiceSupplierDataOnDemand {
 	public ServiceSupplier getNewTransientServiceSupplier(int index) {
         ServiceSupplier obj = new ServiceSupplier();
         setServiceIdPrefix(obj, index);
-        setMaxAccount(obj, index);
+        
         
         ServiceAddress sa = new ServiceAddress();
         sa.setAddress("address");

@@ -29,9 +29,7 @@ public class ServiceSupplier {
     @Size(max = 50)
     private String serviceIdPrefix;
 
-    @NotNull
-    private Integer maxAccount;
-
+   
     @Size(max = 200)
     private String brokerid;
 

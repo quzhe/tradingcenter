@@ -32,7 +32,6 @@
     function menuClick(url){
 		if(url!=null){
 			var contentArea = dijit.byId("content");
-			alert(url);
 			//<![CDATA[
 			var str = "<iframe id='contentFrame' style='width:100%;height:100%;border:1px' border='1' src='"+url+"'></iframe>";
 			contentArea.setContent(str);

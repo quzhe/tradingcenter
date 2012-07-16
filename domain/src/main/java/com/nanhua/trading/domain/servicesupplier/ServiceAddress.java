@@ -19,7 +19,8 @@ import com.nanhua.trading.domain.datadict.NetworkType;
 @RooJpaActiveRecord
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class ServiceAddress {
-
+	
+	
     @NotNull
     @Size(max = 200)
     private String address;
