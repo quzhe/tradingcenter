@@ -44,3 +44,55 @@ field string --fieldName address --notNull --sizeMax 200
 field reference --fieldName networkType --type com.nanhua.trading.domain.datadict.NetworkType --notNull --joinColumnName network_type_id --fetch EAGER
 field reference --fieldName serviceSupplier --type com.nanhua.trading.domain.servicesupplier.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
 field string --fieldName description  --notNull --sizeMax 200
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-16 11:47:22
+module focus --moduleName domain
+entity jpa --class com.nanhua.trading.domain.servicesupplier.ServiceSupplier --testAutomatically
+field string --fieldName name --notNull --sizeMax 200
+field string --fieldName serviceIdPrefix --notNull --sizeMax 50
+field number --fieldName maxAccount --notNull --type java.lang.Integer
+field string --fieldName brokerid --sizeMax 200
+field set --fieldName addresses --type com.nanhua.trading.domain.servicesupplier.ServiceAddress --class com.nanhua.trading.domain.servicesupplier.ServiceSupplier --mappedBy serviceSupplier --notNull true --nullRequired false --cardinality ONE_TO_MANY --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.ServiceAccount --testAutomatically
+field string --fieldName username
+field string --fieldName password
+field string --fieldName description
+// [failed] field reference --fieldName serviceInstance --type com.nanhua.trading.domain.correlator.ServiceInstance --notNull --joinColumnName service_instance_id --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.ServiceInstance --testAutomatically
+field reference --fieldName supplier --type com.nanhua.trading.domain.servicesupplier.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
+field string --fieldName serviceid --notNull
+entity jpa --class com.nanhua.trading.domain.correlator.ServiceAccount --testAutomatically
+field string --fieldName username
+field string --fieldName password
+field string --fieldName description
+field reference --fieldName serviceInstance --type com.nanhua.trading.domain.correlator.ServiceInstance --notNull --joinColumnName service_instance_id --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.ServiceInstance --testAutomatically
+field reference --fieldName supplier --type com.nanhua.trading.domain.servicesupplier.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
+field string --fieldName serviceid --notNull
+field string --fieldName correlatorId
+field set --fieldName accounts --type com.nanhua.trading.domain.correlator.ServiceAccount --class com.nanhua.trading.domain.correlator.ServiceAccount --mappedBy serviceInstance   --cardinality ONE_TO_MANY --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.ServiceInstance --testAutomatically
+field reference --fieldName supplier --type com.nanhua.trading.domain.servicesupplier.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
+field string --fieldName serviceid --notNull
+field string --fieldName correlatorId
+field set --fieldName accounts --type com.nanhua.trading.domain.correlator.ServiceAccount --class com.nanhua.trading.domain.correlator.ServiceInstance --mappedBy serviceInstance   --cardinality ONE_TO_MANY --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.ServiceAccount --testAutomatically
+field string --fieldName username
+field string --fieldName password
+field string --fieldName description
+field reference --fieldName serviceInstance --type com.nanhua.trading.domain.correlator.ServiceInstance --notNull --joinColumnName service_instance_id --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.Correlator --testAutomatically
+field string --fieldName hostname --notNull
+field string --fieldName port --notNull
+field string --fieldName name --notNull
+field reference --fieldName networkType --type com.nanhua.trading.domain.datadict.NetworkType --notNull --joinColumnName network_type_id --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.Correlator --testAutomatically
+field string --fieldName hostname --notNull
+field string --fieldName port --notNull
+field string --fieldName name --notNull
+field reference --fieldName networkType --type com.nanhua.trading.domain.datadict.NetworkType --notNull --joinColumnName network_type_id --fetch EAGER
+field set --fieldName serviceInstances --type com.nanhua.trading.domain.correlator.ServiceInstance --class com.nanhua.trading.domain.correlator.Correlator --mappedBy correlator   --cardinality ONE_TO_MANY --fetch EAGER
+entity jpa --class com.nanhua.trading.domain.correlator.ServiceInstance --testAutomatically
+field reference --fieldName supplier --type com.nanhua.trading.domain.servicesupplier.ServiceSupplier --notNull --joinColumnName service_supplier_id --fetch EAGER
+field string --fieldName serviceid --notNull
+field reference --fieldName correlator --type com.nanhua.trading.domain.correlator.Correlator --notNull --joinColumnName correlator_id --fetch EAGER
+field set --fieldName accounts --type com.nanhua.trading.domain.correlator.ServiceAccount --class com.nanhua.trading.domain.correlator.ServiceInstance --mappedBy serviceInstance   --cardinality ONE_TO_MANY --fetch EAGER

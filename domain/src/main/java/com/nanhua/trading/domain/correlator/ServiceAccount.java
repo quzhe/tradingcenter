@@ -1,10 +1,9 @@
-package com.nanhua.trading.domain.servicesupplier;
+package com.nanhua.trading.domain.correlator;
 
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -12,30 +11,21 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.nanhua.trading.domain.datadict.NetworkType;
-
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class ServiceAddress {
+public class ServiceAccount {
 
-    @NotNull
-    @Size(max = 200)
-    private String address;
+    private String username;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "network_type_id")
-    private NetworkType networkType;
+    private String password;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "service_supplier_id")
-    @JsonBackReference
-    private ServiceSupplier serviceSupplier;
-
-    @NotNull
-    @Size(max = 200)
     private String description;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "service_instance_id")
+    @JsonBackReference
+    private ServiceInstance serviceInstance;
 }
