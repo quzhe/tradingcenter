@@ -241,10 +241,12 @@
 				var supplier = customerTreeStore.get(item.parent);
 				var correlator = customerTreeStore.get(supplier.parent);
 				if(typeof correlator.networkType == 'undefined'){
-					alert("Correlator 未设置网络类型");
+					dojo.byId("messages").innerHTML="Correlator 未设置网络类型";
+					//alert("Correlator 未设置网络类型");
 					return;
 					
 				}else{
+					//alert("${customerserviceinfo_url}&index="+item.index+"&supplierid="+supplier.index+"&networkid="+correlator.networkType.id);
 					createCustomerContentPane.set("href", "${customerserviceinfo_url}&index="+item.index+"&supplierid="+supplier.index+"&networkid="+correlator.networkType.id);
 				}
 			}
@@ -472,14 +474,14 @@
 				rebuildCustomerTree();
 				dialog.show();
 			});
-			/*
-			var delete = dijit.byId("delete");
-			alert(delete);
 			
-			dojo.connect(delete,"onClick",this,function(){
+			var deleteCustomer = dijit.byId("deleteCustomer");
+			
+			dojo.connect(deleteCustomer,"onClick",this,function(){
 				
 				var customerGrid = dijit.byId("customerGrid");
-				var custMemory = dijit.byId("custMemory");
+				
+				//var custMemory = dijit.byId("custMemory");
 				dojo.forEach(customerGrid.selection.getSelected(),function(item){
 					
 					var xhrArgs = {
@@ -488,6 +490,9 @@
 				  		headers: {"Accept": "application/json"},
 						sync:true,
 						load: function(){
+							alert(item.id);
+							alert(dojo.toJson(custMemory.get(13)));
+							//alert(customerGrid);
 							custMemory.remove(item.id);
 				        },
 				      error: function(error,ioArgs){
@@ -504,7 +509,7 @@
 				});
 
 			});
-			*/
+			
 			var createtest = dijit.byId("createtest");
 			dojo.connect(createtest, "onClick",this,  function(){
 				require([ 'dojo/_base/xhr',"dojo/dom-form" ], function(xhr,domForm) {

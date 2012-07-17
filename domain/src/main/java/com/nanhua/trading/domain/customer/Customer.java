@@ -19,6 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nanhua.trading.domain.account.Authority;
 import com.nanhua.trading.domain.account.User;
@@ -55,6 +56,7 @@ public class Customer extends User {
 	// CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
 
 	@Override
+	@Transactional
 	public void remove() {
 		Set<Correlator> sis = this.getCorrelators();
 
@@ -68,6 +70,7 @@ public class Customer extends User {
 			User attached = User.findUser(this.getId());
 			entityManager().remove(attached);
 		}
+		//entityManager().flush();
 	}
 
 	public static Customer findCustomerByUniqueIdentify(String identify) {

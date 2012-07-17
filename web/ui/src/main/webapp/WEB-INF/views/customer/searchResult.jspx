@@ -12,6 +12,7 @@
 	<div id="customerSearchResultPane"></div>
 	
 		<script type="text/javascript">
+			var custMemory;
 			dojo.addOnLoad(function(){
 				var layout = [[
 					 		      {'name': 'username', 'field': 'username', 'width': '20%'},
@@ -23,7 +24,7 @@
 				]];
 				
 				require([ 'dojo/store/Observable','dojo/store/Memory','dojo/data/ObjectStore','dojox/grid/DataGrid'], function(Observable,Memory,ObjectStore,DataGrid) {
-				var custMemory = new Memory({
+				custMemory = new Memory({
 					data : [],
 					idProperty : "id"
 				});

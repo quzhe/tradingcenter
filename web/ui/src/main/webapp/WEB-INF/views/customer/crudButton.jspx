@@ -12,7 +12,7 @@
 		<button id="edit" data-dojo-type="dijit/form/Button" type="button">
 			<spring:message code="button_edit" />
 		</button>
-		<button id="delete" data-dojo-type="dijit/form/Button" type="button">
+		<button id="deleteCustomer" data-dojo-type="dijit/form/Button" type="button">
 			<spring:message code="button_delete" />
 		</button>
 		 

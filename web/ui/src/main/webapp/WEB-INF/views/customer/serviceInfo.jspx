@@ -60,12 +60,13 @@
 	<div id="serviceInstanceAddressesPane" style="width: 100%; height:200px" data-dojo-type="dijit.layout.ContentPane">
 		<script type="dojo/method">
 			dojo.addOnLoad(function(){
+
 				var layout = [[
 				 		      {'name': 'address', 'field': 'address', 'width': '50%'},
 				 		      {'name': 'description', 'field': 'description', 'width': '50%'}
 				 		      
 				]];
-				require([ 'dojo/store/Memory','dojo/data/ObjectStore','dojox/grid/DataGrid','dojo/_base/array'], function() {
+				require([ 'dojo/store/Memory','dojo/data/ObjectStore','dojox/grid/DataGrid','dojo/_base/array'], function(Memory,ObjectStore,DataGrid) {
 					var serviceNode = customerTreeStore.get(<c:out value="${param.index}" />);
 					var supplierNode = customerTreeStore.get(<c:out value="${param.supplierid}" />);
 					//alert(dojo.toJson(supplierNode.addresses));
@@ -87,10 +88,9 @@
 						        structure: layout,
 								style:"height:100%"},
 						        document.createElement('div'));
-							
+					//alert(dojo.byId("serviceInstanceAddressesPane"));		
 					dojo.byId("serviceInstanceAddressesPane").appendChild(serviceAddressGrid.domNode);
 					serviceAddressGrid.startup();	
-					
 					
 				});
 
