@@ -36,15 +36,8 @@
 		<tiles:insertAttribute name="searchCondition"/>
 	</div>
 	<div dojoType="dojox/layout/ContentPane"  id="buttonPane" style="width: 100%; height: 30px;">
-		<button id="create" data-dojo-type="dijit/form/Button" type="button">
-			<spring:message code="button_create" />
-		</button>
-		<button id="edit" data-dojo-type="dijit/form/Button" type="button">
-			<spring:message code="button_edit" />
-		</button>
-		<button id="delete" data-dojo-type="dijit/form/Button" type="button">
-			<spring:message code="button_delete" />
-		</button>
+		<tiles:insertAttribute name="buttonArea"/>
+		
 	</div>
 	<div dojoType="dojox/layout/ContentPane"  id="searchResultPane" style="width: 100%;">
 		 

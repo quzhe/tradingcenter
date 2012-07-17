@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.nanhua.trading.domain.account.Authority;
 import com.nanhua.trading.domain.account.User;
+import com.nanhua.trading.domain.customer.Customer;
 import com.nanhua.trading.domain.datadict.NetworkType;
 import com.nanhua.trading.domain.servicesupplier.ServiceAddress;
 import com.nanhua.trading.domain.servicesupplier.ServiceSupplier;
@@ -24,6 +25,10 @@ public class DevController extends CommonController{
 	private NetworkType chinaTelecom;
 	private NetworkType chinaUnicom;
 	private NetworkType internal;
+	
+	
+	
+	
 	
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value="/dev/initdata",method = RequestMethod.GET,produces=MediaType.TEXT_HTML_VALUE)

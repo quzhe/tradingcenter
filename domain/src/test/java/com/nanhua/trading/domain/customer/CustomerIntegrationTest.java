@@ -33,4 +33,13 @@ public class CustomerIntegrationTest {
         Assert.assertNotNull("Correlator not removed",Correlator.findCorrelator(correlator.getId()));
     }
     
+    /*
+    @Test
+    public void testcreateTester() {
+    
+    	Customer c = Customer.createTester();
+     	c.remove();
+    	
+    }
+    */
 }

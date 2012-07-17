@@ -9,7 +9,8 @@
 	<spring:url value="/admin/customer?serviceinfo" var="customerserviceinfo_url" />
 	<spring:url value="/admin/customer" var="savecustomer_url" />
 	<spring:url value="/admin/customer" var="getcustomer_url" />
-	
+	<spring:url value="/admin/customer" var="deletecustomer_url" />
+	<spring:url value="/admin/customer/createtest" var="createtester_url" />
 	
 	
 	<script type="text/javascript">
@@ -373,8 +374,8 @@
 				});
 			}
 		}else{
-			alert("f");
-			//dojo.byId("messages").innerHTML="基本信息就不完整";
+			//alert("f");
+			dojo.byId("messages").innerHTML="<p>请填写完整基本信息</p>";
 		}
 		
 	}
@@ -471,7 +472,65 @@
 				rebuildCustomerTree();
 				dialog.show();
 			});
+			/*
+			var delete = dijit.byId("delete");
+			alert(delete);
 			
+			dojo.connect(delete,"onClick",this,function(){
+				
+				var customerGrid = dijit.byId("customerGrid");
+				var custMemory = dijit.byId("custMemory");
+				dojo.forEach(customerGrid.selection.getSelected(),function(item){
+					
+					var xhrArgs = {
+				   	url : "${deletecustomer_url}/"+item.id,
+				      handleAs: "json",
+				  		headers: {"Accept": "application/json"},
+						sync:true,
+						load: function(){
+							custMemory.remove(item.id);
+				        },
+				      error: function(error,ioArgs){
+							require(["dojo/_base/connect"], function(connect){
+								connect.publish("resterror", [{
+								status:ioArgs.xhr.status,
+								message:dojo.toJson(error)
+							    }]);
+						    });  
+						}
+				    }
+				   var deferred = dojo.xhrDelete(xhrArgs);
+					
+				});
+
+			});
+			*/
+			var createtest = dijit.byId("createtest");
+			dojo.connect(createtest, "onClick",this,  function(){
+				require([ 'dojo/_base/xhr',"dojo/dom-form" ], function(xhr,domForm) {
+			   	xhr.get({
+						url : "${createtester_url}",
+						headers: {
+							'accept': 'application/json'
+						},
+						handleAs : "json",
+						headers: { "Content-Type": "application/json","Accept": "application/json"},
+						error: function(error,ioArgs){
+							require(["dojo/_base/connect"], function(connect){
+							connect.publish("resterror", [{
+								status:ioArgs.xhr.status,
+								message:dojo.toJson(error)
+							}]);
+							});  
+						},
+						load: function(response, ioArgs){
+							dojo.byId(message).innerHTML="<p>创建测试用户成功</p>";	  
+	    				}
+					});
+				});
+			});			
+
+
 
 		});
 		

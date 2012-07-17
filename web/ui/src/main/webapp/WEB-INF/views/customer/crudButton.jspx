@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+
+		<button id="create" data-dojo-type="dijit/form/Button" type="button">
+			<spring:message code="button_create" />
+		</button>
+		<button id="edit" data-dojo-type="dijit/form/Button" type="button">
+			<spring:message code="button_edit" />
+		</button>
+		<button id="delete" data-dojo-type="dijit/form/Button" type="button">
+			<spring:message code="button_delete" />
+		</button>
+		 
+		<button id="createtest" data-dojo-type="dijit/form/Button" type="button">
+			<spring:message code="button_create_test" />
+			
+			
+		</button>
+		
+</div>

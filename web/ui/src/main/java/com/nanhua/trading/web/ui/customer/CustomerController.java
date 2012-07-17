@@ -21,7 +21,7 @@ import com.nanhua.trading.domain.customer.Customer;
 
 @Controller
 public class CustomerController {
-	
+	 
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@RequestMapping(value = "admin/customer",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ModelAndView createCustomerFromJson(@RequestBody @Valid Customer customer) {
@@ -34,6 +34,14 @@ public class CustomerController {
         mav.addObject("id", customer.getId());
         return mav;
     }
+	
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value="/admin/customer/createtest",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public ModelAndView createTestCustomer(){
+		Customer.createTester();
+		ModelAndView mav = new ModelAndView("createtestjsonView");
+      return mav;
+	} 
 	
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "admin/customer",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

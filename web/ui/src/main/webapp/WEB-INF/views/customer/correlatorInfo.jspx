@@ -26,7 +26,7 @@
 							dojo.mixin(correlatorNode, correlatorInfo);
 							correlatorNode.networkType=networkStore.get(correlatorNetworkType.value);
 							customerTreeStore.put(correlatorNode);
-							dojo.byId("customerMessages").innerHTML="服务器信息存储成功";
+							dojo.byId("messages").innerHTML="服务器信息存储成功";
 						}
 			        }, "saveCorrelatorInfoNode");
 			    });

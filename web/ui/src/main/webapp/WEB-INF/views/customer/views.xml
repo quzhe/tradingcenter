@@ -5,8 +5,9 @@
 <tiles-definitions>
 
 	<definition extends="crud" name="admin/customer/main">
-        <put-attribute name="searchCondition" value="/WEB-INF/views/customer/searchCondition.jspx" />
+      <put-attribute name="searchCondition" value="/WEB-INF/views/customer/searchCondition.jspx" />
     	<put-attribute name="form" value="/WEB-INF/views/customer/form.jspx" />
+    	<put-attribute name="buttonArea" value="/WEB-INF/views/customer/crudButton.jspx" />
     	<put-attribute name="searchResult" value="/WEB-INF/views/customer/searchResult.jspx" />
   	</definition>
 	<definition name="customer/baseinfo" extends="content">

@@ -7,6 +7,9 @@
 	<tiles:insertAttribute name="content"/>
 	
 	
-	
+	<spring:url value="/resources/scripts/dojo.string.addon.js" var="dojo_string_addon_url" />
+	<script type="text/javascript" src="${dojo_string_addon_url}">
+	<!-- empty -->	
+	</script>
 	
 </div>

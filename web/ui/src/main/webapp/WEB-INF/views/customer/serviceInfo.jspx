@@ -24,7 +24,7 @@
 							var serviceInfo = dojo.formToObject("serviceInfoForm");
 							dojo.mixin(serviceNode, serviceInfo);
 							customerTreeStore.put(serviceNode);
-							dojo.byId("customerMessages").innerHTML="服务信息存储成功";
+							dojo.byId("messages").innerHTML="适配器信息存储成功";
 						}
 			        }, "saveServiceInfoNode");
 			    });

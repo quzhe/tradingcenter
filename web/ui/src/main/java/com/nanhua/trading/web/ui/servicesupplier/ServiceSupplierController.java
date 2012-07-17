@@ -20,7 +20,7 @@ public class ServiceSupplierController extends CommonController{
     public ModelAndView getServiceSupplierList() {
 		ModelAndView mav = new ModelAndView("getServiceSupplierListJsonView");
 		mav.addObject("servicesuppliers", ServiceSupplier.findAllServiceSuppliers());
-        return mav;
+      return mav;
     }
 	
 }
