@@ -52,6 +52,7 @@ public class CustomerHelper {
 		si.setCorrelator(cor);
 		cor.getServiceInstances().add(si);
 		
+		
 		si = new ServiceInstance();
 		si.setServiceid("ks_trade_test");
 		si.setSupplier(ServiceSupplier.findSupplierByPrefix("ks_trade_test"));

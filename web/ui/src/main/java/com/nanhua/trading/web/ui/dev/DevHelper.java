@@ -59,16 +59,21 @@ public class DevHelper {
 	}
 	
 	private void generateKSTestOMSServiceSuppliers(){
+	
+		/*
 		ServiceSupplier ss = createServiceSupplier("金仕达交易测试","ks_trade_test","3695AE21");
 		createAddress(ss,"tcp://122.224.197.22:15159","电信交易测试1",chinaTelecom);
 		createAddress(ss,"tcp://124.160.44.166:15159","联通交易测试1",chinaUnicom);
 		ss.persist();
+		*/
 	}
 	private void generateKSTestMDServiceSuppliers(){
+		/*
 		ServiceSupplier ss = createServiceSupplier("金仕达行情测试","ks_md_test","3695AE21");
 		createAddress(ss,"tcp://122.224.197.22:15159","电信交易测试1",chinaTelecom);
 		createAddress(ss,"tcp://124.160.44.166:15159","联通交易测试1",chinaUnicom);
 		ss.persist();
+		*/
 	}
 	private void generateCTPTestOMSServiceSuppliers(){
 		ServiceSupplier ss = createServiceSupplier("CTP交易测试","ctp_trade_test","2030");

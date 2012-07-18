@@ -114,3 +114,10 @@ quit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-18 19:17:26
 module create --moduleName history --topLevelPackage com.nanhua.trading.history
 web mvc setup
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-18 09:44:52
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-18 09:46:34
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-18 09:46:38
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-18 09:47:48
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-18 09:47:52
