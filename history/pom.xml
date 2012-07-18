@@ -208,6 +208,22 @@
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>1.0.1.Final</version>
         </dependency>
+    <dependency>
+            <groupId>com.nanhua.trading</groupId>
+            <artifactId>ui</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+        </dependency>
+    <dependency>
+            <groupId>com.nanhua.trading</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0</version>
+        </dependency>
+    <dependency>
+            <groupId>com.nanhua.trading</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

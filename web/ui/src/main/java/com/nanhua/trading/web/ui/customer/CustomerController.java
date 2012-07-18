@@ -38,7 +38,7 @@ public class CustomerController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value="/admin/customer/createtest",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ModelAndView createTestCustomer(){
-		Customer.createTester();
+		CustomerHelper.createTester();
 		ModelAndView mav = new ModelAndView("createtestjsonView");
       return mav;
 	} 
