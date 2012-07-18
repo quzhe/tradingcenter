@@ -1,10 +1,15 @@
 TradeCenter
 ======
 1.install jdk, set JAVA_HOME
+
 2.install maven, set M2_HOME, add M2_HOME/bin into PATH
+
 3.install spring roo, set ROO_HOME, add ROO_HOME/bin into PATH
+
 4.git clone tc
+
 5.cd tradingcenter
+
 6.open a terminal, run roo. windows will have a character error, please comment them like:
 	private void generateKSTestOMSServiceSuppliers(){
 	
@@ -26,5 +31,7 @@ TradeCenter
 	then move comment after roo generate code
 	
 7.open new terminal, run "mvn clean install", then "mvn eclipse:eclipse" after success
+
 8.run "mvn jetty:run"
+
 9."127.0.0.1:8080/ui" in firefox
