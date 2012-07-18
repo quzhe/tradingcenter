@@ -23,6 +23,7 @@
     <modules>
         <module>domain</module>
     <module>web</module>
+    <module>history</module>
     </modules>
 	<repositories>
 		<repository>

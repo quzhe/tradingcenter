@@ -490,8 +490,8 @@
 				  		headers: {"Accept": "application/json"},
 						sync:true,
 						load: function(){
-							alert(item.id);
-							alert(dojo.toJson(custMemory.get(13)));
+							//alert(item.id);
+							//alert(dojo.toJson(custMemory.get(13)));
 							//alert(customerGrid);
 							custMemory.remove(item.id);
 				        },
