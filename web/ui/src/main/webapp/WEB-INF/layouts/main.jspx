@@ -27,6 +27,13 @@
         async: true
     };
     */
+    require(["dojo/topic", "dojo/dom", "dojo/on", "dojo/domReady!"],function(topic){
+
+    		  var handle = topic.subscribe("sessiontimeout", function(e){
+    		  	alert("asdf");  
+    		  });
+    
+    });
     require(["dojo/parser","dijit/layout/BorderContainer","dojox/layout/ContentPane","dijit/Dialog", "dijit/form/Form","dijit/form/ValidationTextBox","dijit/form/Button"]);
 	
     function menuClick(url){

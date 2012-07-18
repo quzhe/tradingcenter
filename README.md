@@ -11,6 +11,7 @@ TradeCenter
 5.cd tradingcenter
 
 6.open a terminal, run roo. windows will have a character error, please comment them like:
+
 	private void generateKSTestOMSServiceSuppliers(){
 	
 		/*
@@ -28,6 +29,7 @@ TradeCenter
 		ss.persist();
 		*/
 	}
+	
 	then move comment after roo generate code
 	
 7.open new terminal, run "mvn clean install", then "mvn eclipse:eclipse" after success
