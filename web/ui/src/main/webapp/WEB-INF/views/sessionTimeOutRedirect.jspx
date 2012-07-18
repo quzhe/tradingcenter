@@ -3,6 +3,9 @@
   <jsp:output omit-xml-declaration="yes" />
   <script type="text/javascript">
   	require(["dojo/topic"], function(topic){
+  		var handle = topic.subscribe("sessiontimeout", function(e){
+ 		  	alert("child");  
+ 		});
   		topic.publish("sessiontimeout", {msg:"sessiontimeout"});
   	});	
   	/*

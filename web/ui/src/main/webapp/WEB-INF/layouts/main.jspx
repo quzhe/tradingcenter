@@ -27,7 +27,7 @@
         async: true
     };
     */
-    require(["dojo/topic", "dojo/dom", "dojo/on", "dojo/domReady!"],function(topic){
+    require(["dojo/topic"],function(topic){
 
     		  var handle = topic.subscribe("sessiontimeout", function(e){
     		  	alert("asdf");  
