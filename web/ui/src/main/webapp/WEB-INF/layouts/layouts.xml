@@ -21,6 +21,11 @@
   </definition>
   <definition name="content" template="/WEB-INF/layouts/content.jspx">
   </definition>
+  
+  
+  <definition name="loginTemplate" template="/WEB-INF/layouts/login.jspx">
+  	<put-attribute name="resources" value="/WEB-INF/views/resources.jspx" />
+  </definition>
   <!-- 
   <definition name="default" template="/WEB-INF/layouts/default.jspx">
     <put-attribute name="header" value="/WEB-INF/views/header.jspx" />

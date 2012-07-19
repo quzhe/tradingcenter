@@ -26,7 +26,7 @@
         parseOnLoad: true,
         async: true
     };
-    */
+
     require(["dojo/topic"],function(topic){
 
     		  var handle = topic.subscribe("sessiontimeout", function(e){
@@ -34,6 +34,7 @@
     		  });
     
     });
+	*/
     require(["dojo/parser","dijit/layout/BorderContainer","dojox/layout/ContentPane","dijit/Dialog", "dijit/form/Form","dijit/form/ValidationTextBox","dijit/form/Button"]);
 	
     function menuClick(url){

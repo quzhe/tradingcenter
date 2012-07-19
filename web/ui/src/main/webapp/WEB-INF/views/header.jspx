@@ -11,9 +11,9 @@
 	</td>
 	<td align="right"  valign="bottom">
 	<spring:url value="/resources/j_spring_security_logout" var="logout_url" />
-	<!-- 
+	 
 	欢迎您：<sec:authentication property="name"/>|<a href="${logout_url}">退出</a>
-	-->
+	
 	</td>
 	
 	</tr>
