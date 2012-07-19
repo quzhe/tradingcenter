@@ -1,7 +1,7 @@
 <div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
-  
-  
-  ffffffffffffffffffffffffff
+	<h1>欢迎来到南华高端交易平台管理中心</h1>   
+   <p>在账户管理中，您可以设置您需要连接的柜台系统或其他系统的帐号及密码</p>
+   <p>帮助文档请访问https://sites.google.com/site/nanhuatrading/ ，国内用户如果无法访问该网站，请修改</p>
 </div>

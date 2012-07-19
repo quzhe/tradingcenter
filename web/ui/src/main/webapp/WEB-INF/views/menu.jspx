@@ -1,19 +1,25 @@
-<div id="menu" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div id="menu" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:sec="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes"/>
 	
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	<spring:url value="/resources/images/usermanager.jpg" var="img_usermanager_url" />
 	<spring:url value="/admin/customer/main" var="customermanager_url" />
-	<li><img alt="" src="${img_usermanager_url}"><!--  --></img><a href="javascript:menuClick('${customermanager_url}');">用户管理</a></li>
+	<li><img alt="" src="${img_usermanager_url}"><!--  --></img><a href="javascript:menuClick('${customermanager_url}');">帐号管理</a></li>
+  	</sec:authorize>
   	
-  	<spring:url value="/resources/images/usermanager.jpg" var="usermanager_url" />
-	<li><img alt="" src="${usermanager_url}"><!--  --></img><a href="#">用户管理</a></li>
+  	<sec:authorize access="hasRole('ROLE_CUSTOMER')">
+  	<spring:url value="/customer/service" var="customer_service_url" />
+  	<spring:url value="/resources/images/service.jpg" var="serviceimg_url" />
+  	<li><img alt="" src="${serviceimg_url}"><!--  --></img><a href="javascript:menuClick('${customer_service_url}');">服务管理</a></li>
 	
-	<spring:url value="/resources/images/usermanager.jpg" var="usermanager_url" />
-	<li><img alt="" src="${usermanager_url}"><!--  --></img><a href="#">用户管理</a></li>
+	<spring:url value="/resources/images/document.jpg" var="documentimg_url" />
+  	<li><img alt="" src="${documentimg_url}"><!--  --></img><a href="javascript:menuClick('https://sites.google.com/site/nanhuatrading/');">帮助中心</a></li>
 	
+	<spring:url value="/customer/changepasswd" var="changepasswd_url" />
+  	<spring:url value="/resources/images/passwd.jpg" var="changepwimg_url" />
+  	<li><img alt="" src="${changepwimg_url}"><!--  --></img><a href="javascript:menuClick('${changepasswd_url}');">修改密码</a></li>
+	</sec:authorize>
 	
-	<spring:url value="/resources/images/usermanager.jpg" var="usermanager_url" />
-	<li><img alt="" src="${usermanager_url}"><!--  --></img><a href="#">用户管理</a></li>
 	
 </div>

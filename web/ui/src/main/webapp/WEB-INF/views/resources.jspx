@@ -12,7 +12,6 @@
 	<script type="text/javascript" src="http://livedocs.dojotoolkit.org/_static/dojo/dojo.js" data-dojo-config='parseOnLoad: true'><!-- ff --></script>
 	
 	
-	
 	<!--  
 	<link href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dijit/themes/soria/soria.css" rel="stylesheet" type="text/css"/>
 	<link href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojox/grid/resources/Grid.css" rel="stylesheet" type="text/css" />
@@ -24,5 +23,7 @@
 	<script type="text/javascript" src="${dojo_string_addon_url}">
 	<!-- empty -->	
 	</script>
+ 	
+ 	
  	
 </div> 

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nanhua.trading.domain.account.Authority;
+import com.nanhua.trading.domain.account.User;
 import com.nanhua.trading.domain.customer.Customer;
 
 @Controller
@@ -94,7 +96,24 @@ public class CustomerController {
 		return mav;
     }
 	
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "customer/changepassword",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ModelAndView changePassword(@RequestParam String old, @RequestParam String pwValidate){
+		User.changePasswd(old, pwValidate);
+		ModelAndView mav = new ModelAndView("changepassword");
+		return mav;
+	}
 	
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "customer/correlator", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ModelAndView getCorrelators() {
+		
+        ModelAndView mav = new ModelAndView("getCorrelatorsJsonView");
+        String username = ((org.springframework.security.core.userdetails.User)(SecurityContextHolder.getContext().getAuthentication().getPrincipal())).getUsername();
+        Customer cust = Customer.findCustomerByUniqueIdentify(username);
+        mav.addObject("correlators",cust.getCorrelators());
+        return mav;
+    }
 	
 	@RequestMapping(value = "admin/customer/main",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getCustomerMain() {
@@ -112,4 +131,19 @@ public class CustomerController {
     public String gotoServiceinfoPage(Model uiModel) {
 		return "customer/serviceinfo";
 	}
+	@RequestMapping(value = "customer/service",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String gotoServiceManagerPage(Model uiModel) {
+		return "customer/service";
+    }
+	@RequestMapping(value = "customer/changepasswd",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String gotoChangePasswd(Model uiModel) {
+		return "customer/changepasswd";
+    }
+	
+	@RequestMapping(value = "admin/customer/manager/main",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String getCustomerMain(Model uiModel) {
+		return "admin/customer/manager/main";
+    }
+	
+	
 }

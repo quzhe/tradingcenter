@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<spring:url value="/customer/changepassword" var="change_url" />
+	
+	<script type="text/javascript">
+	require(["dojo/parser", "dijit/form/Form","dijit/form/ValidationTextBox","dijit/form/Button","dojox/form/PasswordValidator"]);
+	require(["dojo/ready", "dijit/form/Button", "dojo/dom"], function(ready, Button, dom){
+	    ready(function(){
+			var myButton = new Button({
+	        	
+	            label: "<spring:message code="button_save"/>",
+	            onClick: function(){
+	            	require([ 'dojo/_base/xhr' ], function(xhr) {
+					xhr.post({
+								headers: {
+								    'accept': 'application/json'
+								},
+								content: dojo.formToObject("changePasswdForm"),
+								url:"${change_url}",
+								handleAs: "json",
+							    load: function(response, ioArgs){
+									var targetNode = dojo.byId("changePasswdMessage");
+									targetNode.innerHTML = "<p>密码变更成功</p>";  
+    							},
+								error: function(error,ioArgs){
+		    	 					require(["dojo/_base/connect"], function(connect){
+					  					connect.publish("resterror", [{
+					    				status:ioArgs.xhr.status,
+					    				message:dojo.toJson(error)
+					  					}]);
+									});  
+		    					}
+					});	
+	            	});
+				}
+	         }, "submitLoginBtn");
+	        
+		});
+	});
+	</script>
+	<div id="changePasswdMessage"><!--  --></div>
+	
+	
+	<div data-dojo-type="dijit/form/Form" id="changePasswdForm"
+				data-dojo-id="changePasswdForm" action="" method="">
+	<!-- 
+	<label for="oldpassword">原密码:</label> 
+	<input type="password" id="oldpassword"
+					name="oldpassword" required="true"
+					data-dojo-type="dijit.form.ValidationTextBox" /> 
+	<br /> <br />
+	
+	<label for="newpassword">新密码:</label> 
+	<input type="password" id="newpassword"
+					name="newpassword" required="true"
+					data-dojo-type="dijit.form.ValidationTextBox" />
+	<br /> <br />		
+	-->
+	<label for="old" >原密码:</label> 
+  	<input type="password" id="old" name="old" data-dojo-type="dijit/form/ValidationTextBox"/><br/><br/>
+	<div data-dojo-type="dojox/form/PasswordValidator" name="pwValidate">
+  		
+  		<label >新密码:</label>
+  		<input type="password" pwType="new" /><br/><br/>
+  		<label >请再次输入新密码:</label>
+  		<input type="password" pwType="verify" /><br/><br/>
+	</div>
+	
+	
+	</div>
+	<button id="submitLoginBtn" type="button"/>
+	
+	
+</div>

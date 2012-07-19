@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
- 
+
 <tiles-definitions>
 
-	<definition extends="crud" name="admin/customer/main">
-      <put-attribute name="searchCondition" value="/WEB-INF/views/customer/searchCondition.jspx" />
-    	<put-attribute name="form" value="/WEB-INF/views/customer/form.jspx" />
-    	<put-attribute name="buttonArea" value="/WEB-INF/views/customer/crudButton.jspx" />
-    	<put-attribute name="searchResult" value="/WEB-INF/views/customer/searchResult.jspx" />
-  	</definition>
+	<definition extends="crud" name="admin/customer/main"> 
+		<put-attribute name="searchCondition"
+			value="/WEB-INF/views/customer/searchCondition.jspx" />
+		<put-attribute name="form" value="/WEB-INF/views/customer/form.jspx" />
+		<put-attribute name="buttonArea"
+			value="/WEB-INF/views/customer/crudButton.jspx" />
+		<put-attribute name="searchResult"
+			value="/WEB-INF/views/customer/searchResult.jspx" />
+	</definition>
 	<definition name="customer/baseinfo" extends="content">
-        <put-attribute name="content" value="/WEB-INF/views/customer/baseInfo.jspx"/>
-    </definition>
+		<put-attribute name="content"
+			value="/WEB-INF/views/customer/baseInfo.jspx" />
+	</definition>
 	<definition name="customer/correlatorinfo" extends="content">
-        <put-attribute name="content" value="/WEB-INF/views/customer/correlatorInfo.jspx"/>
+		<put-attribute name="content"
+			value="/WEB-INF/views/customer/correlatorInfo.jspx" />
+	</definition>
+	<definition name="customer/serviceinfo" extends="content">
+		<put-attribute name="content"
+			value="/WEB-INF/views/customer/serviceInfo.jspx" />
+	</definition>
+	<definition name="customer/service" extends="default">
+		<put-attribute name="body"
+			value="/WEB-INF/views/customer/serviceManager.jspx" />
+	</definition>
+
+	<definition name="customer/serviceinstance/account" extends="content">
+		<put-attribute name="content"
+			value="/WEB-INF/views/customer/tradeAccount.jspx" />
+	</definition>
+	<definition name="customer/changepasswd" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/customer/changePasswd.jspx"/>
     </definition>
-    <definition name="customer/serviceinfo" extends="content">
-        <put-attribute name="content" value="/WEB-INF/views/customer/serviceInfo.jspx"/>
-    </definition>
-    
 </tiles-definitions>

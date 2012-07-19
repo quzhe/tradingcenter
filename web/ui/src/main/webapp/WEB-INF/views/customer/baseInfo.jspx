@@ -8,7 +8,6 @@
 
 	
 	<script type="text/javascript">
-		alert("child "+ window.parent.window);
 		require([ "dijit/form/Form","dijit/form/ValidationTextBox", "dijit/form/Button" ]);
 	
 		dojo.addOnLoad(function(){
