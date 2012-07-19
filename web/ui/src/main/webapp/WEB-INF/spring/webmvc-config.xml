@@ -22,7 +22,8 @@
 		up static resources -->
 	<mvc:resources location="/, classpath:/META-INF/web-resources/"
 		mapping="/resources/**" />
-
+	<mvc:resources location="/images/favicon.ico"
+		mapping="/favicon.ico" />
 	<!-- Allows for mapping the DispatcherServlet to "/" by forwarding static 
 		resource requests to the container's default Servlet -->
 	<mvc:default-servlet-handler />
