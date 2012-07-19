@@ -62,9 +62,9 @@
 		
 		<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="splitter:false, region:'center'" id="centerContainer" style="width: 100%; height: 90%;">
 			<!-- 主要展示区 -->
-			
+			<spring:url value="/welcome" var="welcome_url" />
 			<div data-dojo-type="dojox/layout/ContentPane" data-dojo-props="splitter:false, region:'center'" id="content" style="width: 100%; height: 80%;">
-				<iframe id="contentFrame" style='width:100%;height:100%;border:1px' border='1' src='/ui/welcome'></iframe>
+				<iframe id="contentFrame" style='width:100%;height:100%;border:1px' border='1' src='${welcome_url}'></iframe>
 			</div>
 			<!-- 系统消息区 -->
 			
