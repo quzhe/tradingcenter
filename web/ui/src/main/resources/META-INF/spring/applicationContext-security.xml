@@ -9,15 +9,26 @@
         <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" default-target-url='/'/>
         <logout logout-url="/resources/j_spring_security_logout" />
         <!-- Configure these elements to secure URIs in your application -->
-        <intercept-url pattern="/favicon.ico" access="permitAll"/> 
-        <intercept-url pattern="/sessionTimeout" access="permitAll" />
-        <intercept-url pattern="/public/**" access="permitAll" />  
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/dev/**" access="permitAll" />
-        <intercept-url pattern="/resources/**" access="permitAll" />
-        <intercept-url pattern="/login" access="permitAll" />
-        <intercept-url pattern="/**" access="isAuthenticated()" />
-        
+        	 
+        <intercept-url pattern="/favicon.ico" access="permitAll" requires-channel="https"/> 
+        <intercept-url pattern="/sessionTimeout" access="permitAll" requires-channel="https"/>
+        <intercept-url pattern="/public/**" access="permitAll" requires-channel="https"/>  
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="https"/>
+        <intercept-url pattern="/dev/**" access="permitAll" requires-channel="https"/>
+        <intercept-url pattern="/resources/**" access="permitAll" requires-channel="https"/>
+        <intercept-url pattern="/login" access="permitAll" requires-channel="https"/>
+        <intercept-url pattern="/**" access="isAuthenticated()" requires-channel="https"/>
+        	
+        	<!-- 
+        <intercept-url pattern="/favicon.ico" access="permitAll" /> 
+        <intercept-url pattern="/sessionTimeout" access="permitAll"/>
+        <intercept-url pattern="/public/**" access="permitAll"/>  
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/dev/**" access="permitAll"/>
+        <intercept-url pattern="/resources/**" access="permitAll"/>
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        -->
         <!--  
         <intercept-url pattern="/**" access="permitAll" />
         -->
