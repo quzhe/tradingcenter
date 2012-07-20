@@ -1,13 +1,5 @@
 package com.nanhua.trading.web.ui.dev;
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.server.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.server.result.MockMvcResultMatchers.*;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.server.MockMvc;
-import org.springframework.test.web.server.setup.MockMvcBuilders;
 
 
 //TODO wait spring-mvc-test 1.0 release, will remove dependency from pom

@@ -6,6 +6,13 @@
 	<spring:url value="/resources/images/usermanager.jpg" var="img_usermanager_url" />
 	<spring:url value="/admin/customer/main" var="customermanager_url" />
 	<li><img alt="" src="${img_usermanager_url}"><!--  --></img><a href="javascript:menuClick('${customermanager_url}');">帐号管理</a></li>
+  	<!-- 
+  	<spring:url value="/resources/images/usermanager.jpg" var="img_usermanager_url" />
+	-->
+	<spring:url value="/admin/audit" var="audit_url" />
+	<li><img alt="" src="${img_usermanager_url}"><!--  --></img><a href="javascript:menuClick('${audit_url}');">审计日志</a></li>
+  	
+  	
   	</sec:authorize>
   	
   	<sec:authorize access="hasRole('ROLE_CUSTOMER')">

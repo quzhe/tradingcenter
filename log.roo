@@ -122,3 +122,9 @@ quit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-18 09:47:48
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-18 09:47:52
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-19 21:18:39
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-20 09:19:56
+module focus --moduleName domain
+// [failed] entity jpa --class com.nanhua.trading.domain.Error --testAutomatically
+entity jpa --class com.nanhua.trading.domain.audit.Info --testAutomatically
+entity jpa --class com.nanhua.trading.domain.ServerError --testAutomatically
+entity jpa --class com.nanhua.trading.domain.audit.ServerError --testAutomatically
