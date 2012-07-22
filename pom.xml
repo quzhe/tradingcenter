@@ -334,6 +334,15 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+	<resources>
+       	<resource>
+	        <directory>src/main/resources</directory>
+	        <filtering>true</filtering>
+  	  	</resource>
+		
+    	</resources>
+
+
     </build>
 	
 	
@@ -378,9 +387,9 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<hb.dialect>org.hibernate.dialect.H2Dialect</hb.dialect>
-				<hb.hbm2ddl.auto>create</hb.hbm2ddl.auto>
-				<hb.show_sql>true</hb.show_sql>		
+				<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+				<hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
+				<hibernate.show_sql>true</hibernate.show_sql>		
 				<database.driverClassName>org.h2.Driver</database.driverClassName>
 				<database.url>jdbc:h2:mem:nanhua;DB_CLOSE_DELAY=-1</database.url>
 				<database.username>sa</database.username>
