@@ -24,6 +24,7 @@
         <module>domain</module>
     <module>web</module>
     <module>history</module>
+	<module>bus</module>
     </modules>
 	<repositories>
 		<repository>
