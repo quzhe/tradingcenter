@@ -235,6 +235,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.2</version>
+		    <configuration>
+			    <webResources>
+				<resource>
+					<directory>${basedir}/src/main/webapp/WEB-INF</directory>
+					<filtering>true</filtering>
+					<targetPath>WEB-INF</targetPath>
+					<includes>
+						<include>web.xml</include>
+					</includes>
+				</resource>
+			    </webResources>
+		    </configuration>	
                 <!-- <configuration> <webXml>target/web.xml</webXml> </configuration> -->
             </plugin>
             <plugin>
@@ -367,6 +379,12 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.4.v20120524</version>
                 <configuration>
+                		<systemProperties>
+				            <systemProperty>
+				              <name>spring.profiles.active</name>
+				              <value>dev</value>
+				            </systemProperty>
+			           </systemProperties>
                     <webAppConfig>
                         <contextPath>/${project.name}</contextPath>
                     </webAppConfig>
