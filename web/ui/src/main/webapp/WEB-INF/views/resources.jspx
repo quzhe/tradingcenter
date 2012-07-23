@@ -5,12 +5,19 @@
 	<spring:url value="/resources/styles/nanhua.css" var="nanhua_css_url" />
 	<link href="${nanhua_css_url}" rel="stylesheet" type="text/css" />
 	
-	 
+	<spring:url value="/resources/scripts/" var="local_dojo_url" />
+	<link href="${local_dojo_url}dijit/themes/soria/soria.css" rel="stylesheet" type="text/css"/>
+	<link href="${local_dojo_url}dojox/grid/resources/Grid.css" rel="stylesheet" type="text/css" />
+	<link href="${local_dojo_url}dojox/grid/resources/soriaGrid.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${local_dojo_url}dojo/dojo.js" data-dojo-config='parseOnLoad: true'></script>
+	
+	
+	<!--  
 	<link href="http://livedocs.dojotoolkit.org/_static/dijit/themes/soria/soria.css" rel="stylesheet" type="text/css"/>
 	<link href="http://livedocs.dojotoolkit.org/_static/dojox/grid/resources/Grid.css" rel="stylesheet" type="text/css" />
 	<link href="http://livedocs.dojotoolkit.org/_static/dojox/grid/resources/soriaGrid.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="http://livedocs.dojotoolkit.org/_static/dojo/dojo.js" data-dojo-config='parseOnLoad: true'><!-- ff --></script>
-	
+	<script type="text/javascript" src="http://livedocs.dojotoolkit.org/_static/dojo/dojo.js" data-dojo-config='parseOnLoad: true'></script>
+	-->
 	
 	<!--  
 	<link href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dijit/themes/soria/soria.css" rel="stylesheet" type="text/css"/>

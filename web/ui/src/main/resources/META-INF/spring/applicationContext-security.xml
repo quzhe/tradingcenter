@@ -25,11 +25,11 @@
             -->
         </authentication-provider>
     </authentication-manager>
-    
-    <!-- HTTP security configurations -->
     <!-- 
     <beans:beans profile="dev,default">
     -->
+    <!-- HTTP security configurations -->
+    
     <http auto-config="true" use-expressions="true">
         <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" default-target-url='/'/>
         <logout logout-url="/resources/j_spring_security_logout" />
@@ -64,5 +64,5 @@
         <session-management invalid-session-url="/sessionTimeout"/>
     </http>
     </beans:beans>
-    -->
+ 	-->
 </beans:beans>
