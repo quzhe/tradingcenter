@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:int-mail="http://www.springframework.org/schema/integration/mail"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:cloud="http://schema.cloudfoundry.org/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.1.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
+		http://www.springframework.org/schema/integration/mail http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.1.xsd
+		http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-2.1.xsd
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.sina.cn"/>
+		<property name="username" value="quzhe1978"/>
+		<property name="password" value="loveam"/>
+	</bean>
+
+	<bean id="mailTransformer" class="com.nanhua.trading.bus.mail.MailTransformer">
+		<property name="mailSender" ref="mailSender"/>
+	</bean>
+	<bean id="appErrorMailTransformer" class="com.nanhua.trading.bus.mail.AppErrorMailTransformer">
+		<property name="mailSender" ref="mailSender"/>
+		<property name="to" value="quzhe1978@163.com"/>
+		<property name="subject" value="App Error"/>
+	</bean>
+	 
+	<int:channel  id="createUserChannel"/>
+	<int:channel  id="appErrorChannel"/>
+	<int:channel  id="emailChannel"/>
+	  
+	<amqp:inbound-channel-adapter channel="createUserChannel" error-channel="busErrorChannel"
+		queue-names="manager.createuser.queue" connection-factory="connectionFactory" />
+	<int:transformer input-channel="createUserChannel" output-channel="emailChannel" 
+                    ref="mailTransformer"/>
+                
+	<int-mail:outbound-channel-adapter channel="emailChannel" java-mail-properties="javaMailProperties"
+                              mail-sender="mailSender"/>
+	
+	<amqp:inbound-channel-adapter channel="appErrorChannel" error-channel="busErrorChannel" 
+		queue-names="app.error.queue" connection-factory="connectionFactory" />
+	 
+	<int:transformer input-channel="appErrorChannel" output-channel="emailChannel" 
+                    ref="appErrorMailTransformer"/>
+	
+	<!--  	
+	<int-stream:stdout-channel-adapter channel="appErrorChannel" append-newline="true" />	
+	-->
+	<util:properties id="javaMailProperties">
+	  <prop key="mail.smtp.auth">true</prop>
+	</util:properties>
+	 
+	<int:channel id="busErrorChannel">
+     	<int:queue capacity="500"/>
+ 	</int:channel>
+ 	<int:poller default="true" fixed-delay="1000" max-messages-per-poll="1"/>
+ 	
+	<int-stream:stderr-channel-adapter channel="busErrorChannel" append-newline="true" />
+	
+	<!-- Infrastructure -->
+	<rabbit:direct-exchange name="nanhua.trading.exchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="manager.createuser.queue" key="manager.createuser.binding" />
+			<rabbit:binding queue="server.error.queue" key="server.error.queue" />
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="nanhua.trading.exchange"/>
+	<rabbit:admin connection-factory="connectionFactory"
+		auto-startup="true" />
+	<rabbit:queue name="manager.createuser.queue" />
+	<rabbit:queue name="server.error.queue" />
+	
+	<beans profile="dev,default"> 
+		<rabbit:connection-factory id="connectionFactory"
+			host="127.0.0.1" port="5672" />
+		</beans>
+	<beans profile="cf"> 
+		<cloud:rabbit-connection-factory id="connectionFactory"/>
+	</beans>
+	
+	
+	
+	
+
+</beans>
