@@ -129,3 +129,9 @@ entity jpa --class com.nanhua.trading.domain.audit.Info --testAutomatically
 entity jpa --class com.nanhua.trading.domain.ServerError --testAutomatically
 entity jpa --class com.nanhua.trading.domain.audit.ServerError --testAutomatically
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-22 19:28:01
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-22 23:55:17
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-23 13:52:10
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-07-23 14:17:50
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-07-23 14:18:00
