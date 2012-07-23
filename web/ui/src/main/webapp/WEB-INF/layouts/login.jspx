@@ -34,7 +34,7 @@ body {
     border-radius:4px; 
     height:300px; 
     width:380px; 
-    background: -webkit-gradient(linear, left top, left 24, from(#EEE), color-stop(4%, #FFF), to(#EEE)); 
+    background: -webkit-gradient(linear, left top, left 24, from(#EEE), color-stop(4%, #FFF), to(#00498E)); 
     background: -moz-linear-gradient(top, #EEE, #FFF 1px, #EEE 24px); 
     background: -o-linear-gradient(top, #EEEEEE, #FFFFFF 1px, #EEEEEE 24px); 
 } 
@@ -53,11 +53,11 @@ body {
     text-shadow: 0 1px 0 rgba(255, 255, 255, .7), 0px 2px 0 rgba(0, 0, 0, .5); 
     text-transform:uppercase; 
     text-align:center; 
-    color:#666; 
+    color:#FFFFFF; 
     line-height:3em; 
     margin:16px 0 20px 0; 
     letter-spacing: 4px; 
-    font:normal 26px/1 Microsoft YaHei, sans-serif; 
+    font:normal 26px/1 宋体, sans-serif; 
 } 
 fieldset { 
     border:none; 
@@ -168,7 +168,7 @@ document.createElement("footer");
   <form data-dojo-type="dijit/form/Form" id="loginForm" data-dojo-id="loginForm" action="${form_url}" method="post"> 
     <section class="loginForm"> 
       <header> 
-        <h2 align="center"><spring:message code="security_login_title" /></h2> 
+        <h1 align="center"><!-- <spring:message code="security_login_title" />-->南华高端交易平台管理中心</h1> 
       </header> 
       <!-- 
       
