@@ -10,11 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>登录</title> 
-<!--  
+  
 <tiles:insertAttribute name="resources"/>
--->
-<script type="text/javascript" src="http://livedocs.dojotoolkit.org/_static/dojo/dojo.js" data-dojo-config='parseOnLoad: true'><!-- ff --></script>
-	
+
+<!-- 
+<script type="text/javascript" src="http://livedocs.dojotoolkit.org/_static/dojo/dojo.js" data-dojo-config='parseOnLoad: true'></script>
+-->	
 <style type="text/css"> 
 body { 
     margin:0; 
@@ -34,9 +35,9 @@ body {
     border-radius:4px; 
     height:300px; 
     width:380px; 
-    background: -webkit-gradient(linear, left top, left 24, from(#EEE), color-stop(4%, #FFF), to(#00498E)); 
-    background: -moz-linear-gradient(top, #EEE, #FFF 1px, #EEE 24px); 
-    background: -o-linear-gradient(top, #EEEEEE, #FFFFFF 1px, #EEEEEE 24px); 
+    background: -webkit-gradient(linear, left top, left 24, from(#00498E), color-stop(4%, #FFF), to(#00498E)); 
+    background: -moz-linear-gradient(top, #00498E, #FFF 1px, #00498E 24px); 
+    background: -o-linear-gradient(top, #00498E, #FFFFFF 1px, #00498E 24px); 
 } 
 .loginForm:before { 
     content:''; 

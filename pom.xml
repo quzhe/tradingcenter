@@ -17,8 +17,8 @@
 	<hibernate.jpa2.version>1.0.1.Final</hibernate.jpa2.version>
 	<spring-security.version>3.1.0.RELEASE</spring-security.version>
 	<spring-integration.version>2.1.0.RELEASE</spring-integration.version>
-        <jackson.version>2.0.2</jackson.version>
-    
+        <jackson.version>2.0.4</jackson.version>
+    <cloudfoundry-spring>0.8.1</cloudfoundry-spring>
     </properties>
     <modules>
         <module>domain</module>

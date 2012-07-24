@@ -121,9 +121,15 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.0.4</version>
+			<version>${jackson.version}</version>
 		</dependency>
-            
+        
+		<dependency>
+			<groupId>org.cloudfoundry</groupId>
+  			<artifactId>cloudfoundry-runtime</artifactId>
+			<version>${cloudfoundry-spring}</version>
+		</dependency>
+		
     </dependencies>
     <build>
 	

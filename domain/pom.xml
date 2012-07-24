@@ -226,6 +226,13 @@
             <artifactId>common</artifactId>
             <version>1.0</version>
         </dependency>
+		
+		
+		<dependency>
+			<groupId>org.cloudfoundry</groupId>
+  			<artifactId>cloudfoundry-runtime</artifactId>
+			<version>${cloudfoundry-spring}</version>
+		</dependency>
     </dependencies>
     <build>
         <plugins>
