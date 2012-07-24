@@ -51,9 +51,8 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
-     <!--   
+        
     <beans profile="dev,default">
-	 --> 
 	    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
 	        <property name="persistenceUnitName" value="persistenceUnit"/>
 	        <property name="dataSource" ref="dataSource"/>
@@ -91,7 +90,7 @@
 	        <property name="numTestsPerEvictionRun" value="3"/>
 	        <property name="minEvictableIdleTimeMillis" value="1800000"/>
 	    </bean>
-    <!-- 
+     
     </beans>
     
       
@@ -124,5 +123,5 @@
 	    
 	    <cloud:data-source id="dataSource" />
     </beans>
-     -->
+    
 </beans>
