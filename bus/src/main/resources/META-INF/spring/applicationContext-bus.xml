@@ -45,7 +45,7 @@
                               mail-sender="mailSender"/>
 	
 	<amqp:inbound-channel-adapter channel="appErrorChannel" error-channel="busErrorChannel" 
-		queue-names="app.error.queue" connection-factory="connectionFactory" />
+		queue-names="server.error.queue" connection-factory="connectionFactory" />
 	 
 	<int:transformer input-channel="appErrorChannel" output-channel="emailChannel" 
                     ref="appErrorMailTransformer"/>
@@ -68,7 +68,7 @@
 	<rabbit:direct-exchange name="nanhua.trading.exchange">
 		<rabbit:bindings>
 			<rabbit:binding queue="manager.createuser.queue" key="manager.createuser.binding" />
-			<rabbit:binding queue="server.error.queue" key="server.error.queue" />
+			<rabbit:binding queue="server.error.queue" key="server.error.binding" />
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
 	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="nanhua.trading.exchange"/>
@@ -78,7 +78,7 @@
 	<rabbit:queue name="server.error.queue" />
 	
 	 
-		<rabbit:connection-factory id="connectionFactory"
+		<rabbit:connection-factory id="connectionFactory" username="guest" password="guest"
 			host="127.0.0.1" port="5672" />
 		</beans>
 		

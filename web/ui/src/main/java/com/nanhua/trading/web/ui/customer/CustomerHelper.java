@@ -44,12 +44,14 @@ public class CustomerHelper {
 		si.setServiceid("ctp_trade_test");
 		si.setSupplier(ServiceSupplier.findSupplierByPrefix("ctp_trade_test"));
 		si.setCorrelator(cor);
+		si.setAccountLimit(5);
 		cor.getServiceInstances().add(si);
 		
 		si = new ServiceInstance();
 		si.setServiceid("ctp_md_test");
 		si.setSupplier(ServiceSupplier.findSupplierByPrefix("ctp_md_test"));
 		si.setCorrelator(cor);
+		si.setAccountLimit(5);
 		cor.getServiceInstances().add(si);
 		
 		
@@ -57,12 +59,14 @@ public class CustomerHelper {
 		si.setServiceid("ks_trade_test");
 		si.setSupplier(ServiceSupplier.findSupplierByPrefix("ks_trade_test"));
 		si.setCorrelator(cor);
+		si.setAccountLimit(5);
 		cor.getServiceInstances().add(si);
 		
 		si = new ServiceInstance();
 		si.setServiceid("ks_md_test");
 		si.setSupplier(ServiceSupplier.findSupplierByPrefix("ks_md_test"));
 		si.setCorrelator(cor);
+		si.setAccountLimit(5);
 		cor.getServiceInstances().add(si);
 		
 		test.getCorrelators().add(cor);

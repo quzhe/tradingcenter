@@ -50,6 +50,10 @@
 		<input type="text" id="customerServiceid"
 						name="serviceid" required="true"
 						data-dojo-type="dijit/form/ValidationTextBox" /> <br /> <br />
+		<label>accountLimit:</label> 
+		<input type="text" id="customeraccountLimit"
+						name="accountLimit" required="true"
+						data-dojo-type="dijit/form/ValidationTextBox" value="10"/> <br /> <br />
 		<label>description:</label> 
 		<input type="text" id="customerServiceDesc"
 						name="description"

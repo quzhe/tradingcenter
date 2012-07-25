@@ -1,5 +1,11 @@
 package com.nanhua.trading.web.ui.customer;
 
+import java.util.Enumeration;
+import java.util.Iterator;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -25,7 +31,14 @@ public class PublicCustomerController {
     }
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "serviceSupplier",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView getAllSuppliers(@RequestParam String username,@RequestParam String password) {
+    public ModelAndView getAllSuppliers(@RequestParam String username,@RequestParam String password,HttpServletRequest req,HttpServletResponse res) {
+		Enumeration<String> enums = req.getHeaderNames();
+		while(enums.hasMoreElements()){
+			String name = enums.nextElement();
+			System.out.print(name+":");
+			System.out.println(req.getHeader(name));
+		}
+		
 		ModelAndView mav = new ModelAndView("getSuppliersJsonView");
 		mav.addObject("suppliers",ServiceSupplier.findAllServiceSuppliers());
 		return mav;
