@@ -13,6 +13,9 @@ import com.nanhua.trading.domain.servicesupplier.ServiceSupplier;
 
 public class CustomerHelper {
 	
+	
+		
+	
 	public static Customer createTester(){
 		List<Customer> list = Customer.findCustomersByName("test");
 		Integer i = 1;

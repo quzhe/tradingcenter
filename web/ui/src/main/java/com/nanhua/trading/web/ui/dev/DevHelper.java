@@ -1,12 +1,18 @@
 package com.nanhua.trading.web.ui.dev;
 
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 
 import com.nanhua.trading.domain.account.Authority;
 import com.nanhua.trading.domain.account.User;
+import com.nanhua.trading.domain.correlator.ServiceAccount;
+import com.nanhua.trading.domain.correlator.ServiceInstance;
+import com.nanhua.trading.domain.customer.Customer;
 import com.nanhua.trading.domain.datadict.NetworkType;
 import com.nanhua.trading.domain.servicesupplier.ServiceAddress;
 import com.nanhua.trading.domain.servicesupplier.ServiceSupplier;
+import com.nanhua.trading.web.ui.customer.CustomerHelper;
 
 //TODO make me configrable
 public class DevHelper {
@@ -29,6 +35,9 @@ public class DevHelper {
 		//KS init data
 		generateKSTestOMSServiceSuppliers();
 		generateKSTestMDServiceSuppliers();
+		
+		//
+		createTester();
 	}
 	 
 	
@@ -140,5 +149,34 @@ public class DevHelper {
 		ss.setServiceIdPrefix(prefix);
 		ss.setBrokerid(brokerid);
 		return ss;
+	}
+	
+	private void createTester(){
+		CustomerHelper.createTester();
+		Customer cust = Customer.findCustomerByUniqueIdentify("test1");
+		Set<ServiceInstance> sis= cust.getCorrelators().iterator().next().getServiceInstances();
+		for (ServiceInstance si : sis) {
+			if(si.getServiceid().startsWith("ctp")){
+				ServiceAccount sa = new ServiceAccount();
+				sa.setUsername("354420");
+				sa.setPassword("888888");
+				sa.setServiceInstance(si);
+				si.getAccounts().add(sa);
+				
+				sa = new ServiceAccount();
+				sa.setUsername("354422");
+				sa.setPassword("888888");
+				sa.setServiceInstance(si);
+				si.getAccounts().add(sa);
+			}
+			if(si.getServiceid().startsWith("ks")){
+				ServiceAccount sa = new ServiceAccount();
+				sa.setUsername("8059638");
+				sa.setPassword("123456");
+				sa.setServiceInstance(si);
+				si.getAccounts().add(sa);
+			}	
+		}
+		cust.merge();
 	}
 }

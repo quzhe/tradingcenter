@@ -26,7 +26,7 @@
         </authentication-provider>
     </authentication-manager>
      
-    <beans:beans profile="dev,default">
+    <beans:beans profile="dev,default,local">
     
     <!-- HTTP security configurations -->
     
@@ -48,7 +48,7 @@
     </http>
      
     </beans:beans>
-    <beans:beans profile="cf">
+    <beans:beans profile="cloud">
     <http auto-config="true" use-expressions="true">
         <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" default-target-url='/'/>
         <logout logout-url="/resources/j_spring_security_logout" />
