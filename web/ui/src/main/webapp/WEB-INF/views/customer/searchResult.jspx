@@ -37,7 +37,7 @@
 			        store: custStore,
 			        structure: layout,
 			        selectionMode:'single',
-					style:"height:100px"},
+					style:"height:300px"},
 					dojo.byId("customerSearchResultPane"));
 				customerGrid.startup();	
 				});

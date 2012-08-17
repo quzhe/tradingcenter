@@ -86,7 +86,7 @@ public class Customer extends User {
 	public static List<Customer> findCustomersByName(String namelike) {
 		Query q = entityManager()
 				.createQuery(
-						"SELECT  s FROM Customer AS s WHERE s.username LIKE :name ORDER BY s.username DESC");
+						"SELECT  s FROM Customer AS s WHERE s.username LIKE :name ORDER BY s.id DESC");
 		q.setParameter("name", namelike+"%");
 		return q.getResultList();
 	}

@@ -18,15 +18,9 @@ public class CustomerHelper {
 	
 	public static Customer createTester(){
 		List<Customer> list = Customer.findCustomersByName("test");
-		Integer i = 1;
-		for (Customer c : list) {
-			if(StringUtils.isNumeric(c.getUsername().substring(4))){
-				i = Integer.valueOf(c.getUsername().substring(4));
-				i = i+1;
-				break;
-			}
-		}
-		
+		Long i = 1L;
+		if(list.size()!=0)
+		 i = list.get(0).getId()+1;
 		
 		Customer test = new Customer();
 		test.setUsername("test"+i);
